@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<!-- saved from url=(0093)http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Initialisation -->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="en" slick-uniqueid="3" style=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Excess Power Search (new) — GNOME Notebook latest update: 18/05/15 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/justify_text.css" type="text/css">
+  
+    <link rel="stylesheet" href="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/video_responsive.css" type="text/css">
+  
+
+  
+        <link rel="index" title="Index" href="http://budker.berkeley.edu/~gnome/genindex.html">
+        <link rel="search" title="Search" href="http://budker.berkeley.edu/~gnome/search.html">
+    <link rel="top" title="GNOME Notebook latest update: 18/05/15 documentation" href="http://budker.berkeley.edu/~gnome/index.html">
+        <link rel="next" title="Impulse Response Test" href="http://budker.berkeley.edu/~gnome/impulse_response.html">
+        <link rel="prev" title="Excess Power Search" href="http://budker.berkeley.edu/~gnome/excess_power.html"> 
+
+  
+  <script src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/modernizr.min.js.下载"></script>
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body class="wy-body-for-nav" role="document" style=""><div id="MathJax_Message" style="display: none;"></div>
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="http://budker.berkeley.edu/~gnome/index.html" class="icon icon-home"> GNOME Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest update: 18/05/15
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="http://budker.berkeley.edu/~gnome/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/people.html">People</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/bylaws.html">By-laws</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://budker.uni-mainz.de/gnome/">Live Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gitlab.html">Git Platform</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Literature Review</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/axions.html">Dark Matter &amp; Axions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/magnetometers.html">Atomic Magnetometers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/news.html">In the News</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/documentation.html">Books &amp; Articles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/conferences.html">Conferences &amp; Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/presentations.html">Talks &amp; Posters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/manuscripts.html">Collaboration Papers</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ALP Signal &amp; Detection</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_search.html">Search Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_domain_wall.html">Domain wall expected signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_timing.html">Signal generation and timing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_distribution.html">Vector velocity distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_sensitivity.html">Sensitivity to transient signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_parameters.html">Translating data to parameter space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_array.html">Array sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_beyond.html">Axion stars &amp; ALP bursts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Collaboration Meetings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/connect.html">How to connect?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/meetings.html">Meeting Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/bootcamp.html">Bootcamp 2016</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/fribourg17.html">Fribourg 2017</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Network Stations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_beijing.html">Beijing, China</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_berkeley1.html">Berkeley 1, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_berkeley2.html">Berkeley 2, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_daejeon.html">Daejeon, South Korea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_fribourg.html">Fribourg, Switzerland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_hayward.html">Hayward, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_hefei.html">Hefei, China</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_krakow.html">Krakow, Poland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_lewisburg.html">Lewisburg, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_mainz.html">Mainz, Germany</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintenance Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/characterization.html">Characterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/instrumentation.html">Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://budker.berkeley.edu/~vincent/gnome/_materials/docs/report_low_pass_filter.pdf">Low-pass filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/manuals.html">Product Manuals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/fo_scan.html">Force Oscillation Scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/pulses.html">Pulse Injection</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Sanity Box</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html">Description of GNOME Interlock System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html#hardware">1 Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html#software">2 Software</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Acquisition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gps_box.html">GPS Data Logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sd_card.html">Secure Digital card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/structure.html">Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/algorithm.html">Data Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/daq.html">Acquisition Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/upload.html">Data Synchronizer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Analysis Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/framework.html">Analysis Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html">Data Analysis Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/tutorial/report.html">GDAS examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/representation/report.html">Spectrogram vs. Scalogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/allan_deviation.html">Allan Standard Deviation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/excess_power.html">Excess Power Search</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#"><span class="toctree-expand"></span>Excess Power Search (new)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Introduction">Introduction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Initialisation"><span class="toctree-expand"></span>Initialisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Extract-sampling-rate">Extract sampling rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Frequency-range-to-explore">Frequency range to explore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Channel-number-and-bandwidth">Channel number and bandwidth</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Calculate-overall-power-spectral-density">Calculate overall power spectral density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Two-point-spectral-correlation">Two-point spectral correlation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/impulse_response.html">Impulse Response Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/coincidence.html">Coincidence Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/coherence.html">Coherence Analysis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Feature Analysis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/tile_creation/report.html">Tile creation problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/psd_estimation/report.html">Segment’s length vs. PSD estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/fake_burst/report.html">Fake burst in artificial data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/earthquake/report.html">Seismic signatures in Fribourg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/earthquake_california/report.html">Seismic non-signature in California</a></li>
+</ul>
+<p class="caption"><span class="caption-text">All-station Science Runs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201603.html">2016 March</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201607.html">2016 July</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201611.html">2016 November</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201706.html">2017 June</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201711.html">2017 November</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Analysis Reports</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201603_pps/report.html">Pulse-per-second test (Mar. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201603_asd.html">Allan Standard Deviation (Mar. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201611_bandwidth.html">Bandwidth measurements (Nov. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201611_excess_power/report.html">Fribourg Excess Power (Nov. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201706_bandwidth.html">Bandwidth measurements (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201706_hector.html">Hector’s analysis (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_24hr_components/report.html">24-hour components (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/spectrograms/20170608_4-5AM.html">One hour spectrograms (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/wavelet/20170608.html">Wavelet analysis (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_systematic_trend/report.html">Systematic trend (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_histograms/report.html">Multi-period histograms (Jun. ‘17)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="http://budker.berkeley.edu/~gnome/index.html">GNOME Notebook</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="http://budker.berkeley.edu/~gnome/index.html">Docs</a> »</li>
+        
+      <li>Excess Power Search (new)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="http://budker.berkeley.edu/~gnome/_sources/_notebooks/excess_power/notebook/report.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Excess-Power-Search-(new)">
+<h1>Excess Power Search (new)<a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Excess-Power-Search-(new)" title="Permalink to this headline">¶</a></h1>
+<p><strong>Table of Contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Initialisation" id="id2">Initialisation</a><ul>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Extract-sampling-rate" id="id3">Extract sampling rate</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Frequency-range-to-explore" id="id4">Frequency range to explore</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Channel-number-and-bandwidth" id="id5">Channel number and bandwidth</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Calculate-overall-power-spectral-density" id="id6">Calculate overall power spectral density</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Two-point-spectral-correlation" id="id7">Two-point spectral correlation</a></li>
+</ul>
+</div>
+<div class="section" id="Introduction">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id1">Introduction</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Excess Power method is designed to detect burst signals of unknown
+waveform, which is basically the case for GNOME and its search of
+Axion-Like Particles (ALP). This method was developed and introduced by
+<a class="reference external" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/materials/2001_anderson.pdf">Anderson et al. (2000)</a> and has been
+extensively used in the detection of burst sources of gravitational
+radiation. A more technical documentation was written by <a class="reference external" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/materials/2007_brady.pdf">Brady et al.
+(2007)</a> describing how the algorithm
+used by the LIGO collaboration works and how the theory is translated
+into code.</p>
+<p>In this report, we give a comprehensive description of the <a class="reference external" href="http://budker.berkeley.edu/~vincent/gnome/generated/gdas.excess_power.html#gdas.excess_power">excess-power
+module</a>
+implemented into the GDAS software. Although the algorithm can be quite
+sophisticated, the methodology is actually not that difficult to grasp
+and simply consists of mapping the entire time-frequency space covered
+by the data by splitting it into different tiles and explore different
+bandwidth and duration in order to search and identify trigger signals.
+In the figure further below, we show the four ways the data will be
+split and processed, namely, by segments, channels, blocks and tiles.</p>
+<p>An important aspect of this analysis technique is the filtering that is
+involved and used to create individual tile’s time series. Indeed, when
+one converts the time series of the extracted dataset into Fourier
+space, one can see signals covering a large range of frequency from 0 to
+the Nyquist limit. However, if one wishes to identify signal from a tile
+of specific bandwidth and covering a specific range of frequencies, any
+signals outside that range should not be present in the tile’s time
+series. The filtering is used to filter out those signals such that the
+time series of any given tiles only contains signals that lie within the
+tile’s frequency domain.</p>
+<pre><center><a href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/materials/excess_power_diagram.pdf"><img src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/excess_power_diagram.png" width="100%"></a></center></pre></div>
+<div class="section" id="Initialisation">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id2">Initialisation</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Initialisation" title="Permalink to this headline">¶</a></h2>
+<p>In this report, we will use real magnetometry data from the Fribourg
+station recorded on June 8, 2017 between 1 and 2 PM. The time series
+alone can be very easily extracted as follows:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdas</span>
+<span class="n">station</span> <span class="o">=</span> <span class="s1">'fribourg01'</span>
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="s1">'2017-06-08-13'</span><span class="p">,</span><span class="s1">'2017-06-08-14'</span>
+<span class="n">datapath</span> <span class="o">=</span> <span class="s1">'/Users/vincent/ASTRO/data/GNOME/GNOMEDrive/gnome/serverdata/'</span>
+<span class="n">ts_data</span> <span class="o">=</span> <span class="n">gdas</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">station</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">'ts'</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">'pT'</span><span class="p">,</span><span class="n">rep</span><span class="o">=</span><span class="n">datapath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>In the next sections, we will provide a thorough description of every
+line of code from the <code class="docutils literal"><span class="pre">epower.py</span></code> module.</p>
+<div class="section" id="Extract-sampling-rate">
+<h3><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id3">Extract sampling rate</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Extract-sampling-rate" title="Permalink to this headline">¶</a></h3>
+<p>The first parameter to be extracted from the time series metadata is the
+sampling rate:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Determine sampling rate based on extracted time series</span>
+<span class="n">sample_rate</span> <span class="o">=</span> <span class="n">ts_data</span><span class="o">.</span><span class="n">sample_rate</span>
+<span class="k">print</span> <span class="n">sample_rate</span><span class="p">,</span><span class="s1">'Hz'</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>500 Hz
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Frequency-range-to-explore">
+<h3><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id4">Frequency range to explore</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Frequency-range-to-explore" title="Permalink to this headline">¶</a></h3>
+<p>It may be that one only wants to explore the data from a specific
+frequency range. For this purpose, we allow the user to define both
+minimum and maximum frequencies by specifying the value of the <code class="docutils literal"><span class="pre">fmin</span></code>
+and <code class="docutils literal"><span class="pre">fmax</span></code> arguments, that is the frequency of the first and last
+filters from the filter bank. By default, the minimum frequency is set
+to 0 and the maximum frequency as undefined:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Lowest frequency of the filter bank.</span>
+<span class="n">fmin</span><span class="o">=</span><span class="mi">0</span>
+<span class="c1"># Highest frequency of the filter bank.</span>
+<span class="n">fmax</span><span class="o">=</span><span class="bp">None</span>
+</pre></div>
+</div>
+</div>
+<p>If the value is not defined, we set it to be equal to the Nyquist
+frequency, that is half the sampling rate, which makes sense as any
+larger signal would not be identifiable.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Check if tile maximum frequency is not defined</span>
+<span class="k">if</span> <span class="n">fmax</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">fmax</span><span class="o">&gt;</span><span class="n">sample_rate</span><span class="o">/</span><span class="mf">2.</span><span class="p">:</span>
+    <span class="c1"># Set the tile maximum frequency equal to the Nyquist frequency</span>
+    <span class="c1"># (i.e. half the sampling rate)</span>
+    <span class="n">fmax</span> <span class="o">=</span> <span class="n">sample_rate</span> <span class="o">/</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Channel-number-and-bandwidth">
+<h3><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id5">Channel number and bandwidth</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Channel-number-and-bandwidth" title="Permalink to this headline">¶</a></h3>
+<p>In order to explore signals of different bandwidths, the frequency range
+can be split into multiple narrow band channels around which filters
+will be computed. The bandwidth of the finest filter, <code class="docutils literal"><span class="pre">band</span></code>, and the
+total number of channels, <code class="docutils literal"><span class="pre">nchans</span></code>, can be determined if one of these
+values is determined by the user. In this example, we set both variables
+as follows:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Channel bandwidth</span>
+<span class="n">band</span><span class="o">=</span><span class="bp">None</span>
+<span class="c1"># Total number of channels</span>
+<span class="n">nchans</span><span class="o">=</span><span class="mi">256</span>
+</pre></div>
+</div>
+</div>
+<p>If the bandwidth of the finest filter is defined, the total number of
+channels is then set to be equal to the total frequency band divived by
+a single channel’s bandwidth. Conversely, if the channel’s bandwidth is
+not defined but the total number of channels is, the smallest bandwidth
+will therefore correspond to the frequency band divided by the number of
+channels.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Check whether or not tile bandwidth and channel are defined</span>
+<span class="k">if</span> <span class="n">band</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">nchans</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="c1"># Exit program with error message</span>
+    <span class="nb">exit</span><span class="p">(</span><span class="s2">"Either bandwidth or number of channels must be specified..."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Check if tile maximum frequency larger than its minimum frequency</span>
+    <span class="k">assert</span> <span class="n">fmax</span> <span class="o">&gt;=</span> <span class="n">fmin</span>
+    <span class="c1"># Define spectral band of data</span>
+    <span class="n">data_band</span> <span class="o">=</span> <span class="n">fmax</span> <span class="o">-</span> <span class="n">fmin</span>
+    <span class="c1"># Check whether tile bandwidth or channel is defined</span>
+    <span class="k">if</span> <span class="n">band</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Define number of possible filter bands</span>
+        <span class="n">nchans</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data_band</span> <span class="o">/</span> <span class="n">band</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">nchans</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Define filter bandwidth</span>
+        <span class="n">band</span> <span class="o">=</span> <span class="n">data_band</span> <span class="o">/</span> <span class="n">nchans</span>
+    <span class="c1"># Check if number of channels is superior than unity</span>
+    <span class="k">assert</span> <span class="n">nchans</span> <span class="o">&gt;</span> <span class="mi">1</span>
+    <span class="n">nchans</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Calculate-overall-power-spectral-density">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id6">Calculate overall power spectral density</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Calculate-overall-power-spectral-density" title="Permalink to this headline">¶</a></h2>
+<p>The instrument’s noise Power Spectral Density (PSD) will be used to
+whiten the data. The first thing to do before calculating the PSD is to
+ensure that the time series data are converted into an array of floating
+values:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="c1"># Convert time series as array of float</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">ts_data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>[134.20001221 133.3999939  137.19999695 ... 117.90000153
+ 119.5        116.09999847]
+</pre></div></div>
+</div>
+<p>The PSD is calculated by splitting up the signal into overlapping
+segments and scan through each segment to calculate individual
+periodogram. All the periodograms are then averaged, reducing the
+variance of the individual power measurements. This is called the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Welch%27s_method">Welch’s method</a>. In
+order to proceed forward, we first need to specify the length of each
+segment, <code class="docutils literal"><span class="pre">seg_len</span></code>, as well as the separation between 2 consecutive
+segments, <code class="docutils literal"><span class="pre">seg_stride</span></code>. Both parameters are originally expressed in
+second unit and must be converted to sample unit. This can be achieved
+by multiplying both quantities by the sampling rate, <code class="docutils literal"><span class="pre">sample_rate</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Length of each segment in seconds</span>
+<span class="n">psd_segment_length</span><span class="o">=</span><span class="mi">60</span>
+<span class="c1"># Separation between 2 consecutive segments in seconds</span>
+<span class="n">psd_segment_stride</span><span class="o">=</span><span class="mi">30</span>
+<span class="c1"># Define segment length for PSD estimation in sample unit</span>
+<span class="n">seg_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">psd_segment_length</span> <span class="o">*</span> <span class="n">sample_rate</span><span class="p">)</span>
+<span class="c1"># Define separation between consecutive segments in sample unit</span>
+<span class="n">seg_stride</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">psd_segment_stride</span> <span class="o">*</span> <span class="n">sample_rate</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">seg_len</span><span class="p">,</span><span class="n">seg_stride</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>30000 15000
+</pre></div></div>
+</div>
+<p>The Welch’s method can then by applied to the data using the
+<a class="reference external" href="http://pycbc.org/pycbc/latest/html/pycbc.psd.html?highlight=welch#pycbc.psd.estimate.welch">pycbc.psd.estimate.welch</a>
+module. We note that one of the arguments in this module is the method
+used for averaging individual segment PSDs, <code class="docutils literal"><span class="pre">avg_method</span></code>. In our
+program, we use the median-mean method as the default setup:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pycbc</span> <span class="kn">import</span> <span class="n">psd</span>
+<span class="c1"># Average method</span>
+<span class="n">psd_estimation</span><span class="o">=</span><span class="s1">'median-mean'</span>
+<span class="c1"># Create overall PSD using Welch's method</span>
+<span class="n">fd_psd</span> <span class="o">=</span> <span class="n">psd</span><span class="o">.</span><span class="n">welch</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">avg_method</span><span class="o">=</span><span class="n">psd_estimation</span><span class="p">,</span><span class="n">seg_len</span><span class="o">=</span><span class="n">seg_len</span><span class="p">,</span><span class="n">seg_stride</span><span class="o">=</span><span class="n">seg_stride</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [82]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gwpy.plotter</span> <span class="kn">import</span> <span class="n">FrequencySeriesPlot</span>
+<span class="kn">from</span> <span class="nn">gwpy.frequencyseries</span> <span class="kn">import</span> <span class="n">FrequencySeries</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">FrequencySeriesPlot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span><span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FrequencySeries</span><span class="p">(</span><span class="n">fd_psd</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">fd_psd</span><span class="o">.</span><span class="n">delta_f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span><span class="mf">1e2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">'PSD [pT$^2$/Hz]'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"psd.pdf"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/_notebooks_excess_power_notebook_report_20_0.png" src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/_notebooks_excess_power_notebook_report_20_0.png">
+</div>
+</div>
+</div>
+<div class="section" id="Two-point-spectral-correlation">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#id7">Two-point spectral correlation</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html#Two-point-spectral-correlation" title="Permalink to this headline">¶</a></h2>
+<p>The two-point spectral correlation is used</p>
+<p>In order to create a bank of band-pass filters covering the entire
+time-frequency space, we will calculate the two-point spectral
+correlation</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [86]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lal</span>
+<span class="c1"># Window fraction to discard</span>
+<span class="n">window_fraction</span><span class="o">=</span><span class="mi">0</span>
+<span class="c1"># Create whitening window</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">lal</span><span class="o">.</span><span class="n">CreateTukeyREAL8Window</span><span class="p">(</span><span class="n">seg_len</span><span class="p">,</span> <span class="n">window_fraction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>For each channel, we generate a frequency domain channel filter
+function. The frequency band can be defined by using the central
+frequency of the individual filter, <code class="docutils literal"><span class="pre">freq</span></code>, and the bandwidth of the
+channel, <code class="docutils literal"><span class="pre">band</span></code>. While the bandwidth is defined from either the
+user-defined total number of channels, <code class="docutils literal"><span class="pre">nchans</span></code>, or the user-defined
+channel’s bandwidth, <code class="docutils literal"><span class="pre">band</span></code>, the central frequency, on the other hand,
+is determined by the minimum frequency of the filter bank, <code class="docutils literal"><span class="pre">fmin</span></code>, and
+the channel’s bandwidth, <code class="docutils literal"><span class="pre">band</span></code>, as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="n">fmin</span> <span class="o">+</span> <span class="n">band</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">band</span>
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [87]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Create FFT plan</span>
+<span class="n">fft_plan</span> <span class="o">=</span> <span class="n">lal</span><span class="o">.</span><span class="n">CreateForwardREAL8FFTPlan</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre><span></span>In [88]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2"><div class="highlight"><pre><span></span><span class="c1"># Perform two point spectral correlation</span>
+<span class="n">spec_corr</span> <span class="o">=</span> <span class="n">lal</span><span class="o">.</span><span class="n">REAL8WindowTwoPointSpectralCorrelation</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">fft_plan</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="http://budker.berkeley.edu/~gnome/impulse_response.html" class="btn btn-neutral float-right" title="Impulse Response Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="http://budker.berkeley.edu/~gnome/excess_power.html" class="btn btn-neutral" title="Excess Power Search" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © Copyright 2018, GNOME Collaboration (maintained by Vincent Dumont).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'latest update: 18/05/15',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/jquery.js.下载"></script>
+      <script type="text/javascript" src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/underscore.js.下载"></script>
+      <script type="text/javascript" src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/doctools.js.下载"></script>
+      <script type="text/javascript" src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/MathJax.js.下载"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="./Excess Power Search (new) — GNOME Notebook latest update_ 18_05_15 documentation_files/theme.js.下载"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+</body></html>

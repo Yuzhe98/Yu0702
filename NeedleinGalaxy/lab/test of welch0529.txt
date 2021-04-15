@@ -1,0 +1,84 @@
+import numpy as np
+import scipy.signal as signal
+import matplotlib.pyplot as plt
+from scipy.fftpack import fft
+
+N = 1000;#the amount of samples
+fs = 500;#Sampling frequency
+
+#to generate time series
+t = np.arange(N) / fs;
+tf = np.linspace(0.0, fs, N);
+
+#to generate a noise series which obeies the normal distribution N(mu,sigma^2)
+sigma=0.1;
+mu= 1;
+noise = (sigma * np.random.randn(1,N)+ mu).flatten();
+plt.hist(noise, bins=20)
+plt.grid(False)
+plt.xlabel('Noise Amplitude')
+plt.ylabel('Counts')
+plt.show();
+
+#signal series
+frequ = 50;
+freqt = frequ *(1+ 0.3*np.sin(2*np.pi*t));#t*t/4
+amp=1;#the amplitude of sine signals
+s0=amp*np.sin(freqt*2.0*np.pi*t);#signal series without noise
+s=s0+noise;
+
+#
+plt.plot(t, freqt)
+plt.grid()
+plt.title("signal series without noise")
+plt.show();
+
+#signal series without noise
+plt.plot(t, s0);
+plt.grid();
+plt.title("signal series without noise");
+plt.show();
+
+#signal series without noise
+plt.plot(t[N//8:N//2], s0[N//8:N//2]);
+plt.grid();
+plt.title("part of signal series without noise");
+plt.show();
+
+#no transform
+plt.plot(t, s);
+plt.grid();
+plt.title("signal series with noise")
+plt.show();
+
+#signal series without noise
+plt.plot(t[N//8:N//2], s[N//8:N//2]);
+plt.grid();
+plt.title("part of signal series with noise");
+plt.show();
+
+#Fast Fourier Transform
+sf=fft(s);
+plt.plot(tf[0:N//2], np.abs(sf[0:N//2])/(N)*2)
+plt.grid()
+plt.title("signal series processed with FFT")
+plt.show();
+
+#Welch's Method
+f, Pwelch_spec = signal.welch(s, fs, scaling='spectrum')
+plt.semilogy(f, Pwelch_spec)
+plt.title("signal series processed with Welch's Method")
+plt.xlabel('frequency [Hz]')
+plt.ylabel('Power Spectral Density')
+plt.grid()
+plt.show();
+
+#Periodogram Measurements
+f, Pxx_den = signal.periodogram(s, fs)
+plt.semilogy(f, Pxx_den)
+plt.ylim([1e-8, 1e1])
+plt.title("signal series processed with Periodogram Measurements")
+plt.xlabel('frequency [Hz]')
+plt.ylabel('Power Spectral Density')
+plt.grid()
+plt.show();

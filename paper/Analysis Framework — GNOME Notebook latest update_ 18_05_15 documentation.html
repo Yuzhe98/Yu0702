@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://budker.berkeley.edu/~gnome/framework.html -->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="en" slick-uniqueid="3" style=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Analysis Framework — GNOME Notebook latest update: 18/05/15 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/justify_text.css" type="text/css">
+  
+    <link rel="stylesheet" href="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/video_responsive.css" type="text/css">
+  
+
+  
+        <link rel="index" title="Index" href="http://budker.berkeley.edu/~gnome/genindex.html">
+        <link rel="search" title="Search" href="http://budker.berkeley.edu/~gnome/search.html">
+    <link rel="top" title="GNOME Notebook latest update: 18/05/15 documentation" href="http://budker.berkeley.edu/~gnome/index.html">
+        <link rel="next" title="Data Analysis Software" href="http://budker.berkeley.edu/~gnome/gdas.html">
+        <link rel="prev" title="Data Synchronizer" href="http://budker.berkeley.edu/~gnome/upload.html"> 
+
+  
+  <script src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/modernizr.min.js.下载"></script>
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body class="wy-body-for-nav" role="document" style=""><div id="MathJax_Message" style="display: none;"></div>
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="http://budker.berkeley.edu/~gnome/index.html" class="icon icon-home"> GNOME Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest update: 18/05/15
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="http://budker.berkeley.edu/~gnome/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/people.html">People</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/bylaws.html">By-laws</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://budker.uni-mainz.de/gnome/">Live Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gitlab.html">Git Platform</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Literature Review</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/axions.html">Dark Matter &amp; Axions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/magnetometers.html">Atomic Magnetometers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/news.html">In the News</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/documentation.html">Books &amp; Articles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/conferences.html">Conferences &amp; Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/presentations.html">Talks &amp; Posters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/manuscripts.html">Collaboration Papers</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ALP Signal &amp; Detection</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_search.html">Search Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_domain_wall.html">Domain wall expected signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_timing.html">Signal generation and timing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_distribution.html">Vector velocity distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_sensitivity.html">Sensitivity to transient signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_parameters.html">Translating data to parameter space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_array.html">Array sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_beyond.html">Axion stars &amp; ALP bursts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Collaboration Meetings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/connect.html">How to connect?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/meetings.html">Meeting Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/bootcamp.html">Bootcamp 2016</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/fribourg17.html">Fribourg 2017</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Network Stations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_beijing.html">Beijing, China</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_berkeley1.html">Berkeley 1, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_berkeley2.html">Berkeley 2, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_daejeon.html">Daejeon, South Korea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_fribourg.html">Fribourg, Switzerland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_hayward.html">Hayward, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_hefei.html">Hefei, China</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_krakow.html">Krakow, Poland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_lewisburg.html">Lewisburg, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_mainz.html">Mainz, Germany</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintenance Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/characterization.html">Characterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/instrumentation.html">Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://budker.berkeley.edu/~vincent/gnome/_materials/docs/report_low_pass_filter.pdf">Low-pass filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/manuals.html">Product Manuals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/fo_scan.html">Force Oscillation Scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/pulses.html">Pulse Injection</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Sanity Box</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html">Description of GNOME Interlock System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html#hardware">1 Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html#software">2 Software</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Acquisition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gps_box.html">GPS Data Logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sd_card.html">Secure Digital card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/structure.html">Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/algorithm.html">Data Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/daq.html">Acquisition Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/upload.html">Data Synchronizer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Analysis Tools</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="http://budker.berkeley.edu/~gnome/framework.html#"><span class="toctree-expand"></span>Analysis Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/framework.html#data-analysis-techniques">Data Analysis Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/framework.html#multi-user-server">Multi-user Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/framework.html#large-dataset-analysis">Large Dataset Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html">Data Analysis Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/tutorial/report.html">GDAS examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/representation/report.html">Spectrogram vs. Scalogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/allan_deviation.html">Allan Standard Deviation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/excess_power.html">Excess Power Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html">Excess Power Search (new)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/impulse_response.html">Impulse Response Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/coincidence.html">Coincidence Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/coherence.html">Coherence Analysis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Feature Analysis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/tile_creation/report.html">Tile creation problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/psd_estimation/report.html">Segment’s length vs. PSD estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/fake_burst/report.html">Fake burst in artificial data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/earthquake/report.html">Seismic signatures in Fribourg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/earthquake_california/report.html">Seismic non-signature in California</a></li>
+</ul>
+<p class="caption"><span class="caption-text">All-station Science Runs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201603.html">2016 March</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201607.html">2016 July</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201611.html">2016 November</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201706.html">2017 June</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201711.html">2017 November</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Analysis Reports</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201603_pps/report.html">Pulse-per-second test (Mar. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201603_asd.html">Allan Standard Deviation (Mar. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201611_bandwidth.html">Bandwidth measurements (Nov. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201611_excess_power/report.html">Fribourg Excess Power (Nov. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201706_bandwidth.html">Bandwidth measurements (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201706_hector.html">Hector’s analysis (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_24hr_components/report.html">24-hour components (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/spectrograms/20170608_4-5AM.html">One hour spectrograms (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/wavelet/20170608.html">Wavelet analysis (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_systematic_trend/report.html">Systematic trend (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_histograms/report.html">Multi-period histograms (Jun. ‘17)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="http://budker.berkeley.edu/~gnome/index.html">GNOME Notebook</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="http://budker.berkeley.edu/~gnome/index.html">Docs</a> »</li>
+        
+      <li>Analysis Framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="http://budker.berkeley.edu/~gnome/_sources/framework.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="analysis-framework">
+<h1>Analysis Framework<a class="headerlink" href="http://budker.berkeley.edu/~gnome/framework.html#analysis-framework" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Anyone interested in working on the GNOME data analysis software should read the documentation by Sam Afach, available <a class="reference external" href="http://budker.berkeley.edu/~vincent/gnome/_materials/docs/analysis_proposal.pdf">here</a>, containing meaningful advices and suggestions regarding basic but essential coding style.</p>
+</div>
+<div class="section" id="data-analysis-techniques">
+<h2>Data Analysis Techniques<a class="headerlink" href="http://budker.berkeley.edu/~gnome/framework.html#data-analysis-techniques" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://docs.google.com/document/d/1uohteaIydiwz4T1K1jzfibWNR2agUPix9MaRup9XPig"><img alt="_images/logo_list.png" class="align-left" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/logo_list.png" style="width: 20%;"></a>
+<p>The main objective of the GNOME project is to look for consistent signatures of domain wall crossing among various stations. In order to achieve this goal, we use two analysis techniques originally developped by the <a class="reference external" href="https://www.ligo.caltech.edu/">LIGO</a> collaboration for gravitational wave search. Those two techniques are the <a class="reference external" href="http://budker.berkeley.edu/~gnome/excess_power.html">excess power search</a> and <a class="reference external" href="http://budker.berkeley.edu/~gnome/coincidence.html">coincidence</a> analysis. While both techniques represent the core components of the GNOME analysis, there are many other analysis tools that can be used to either characterize the instruments or to do statistical analysis on the data themselves. You may click on the icon below to access a full list of analysis techniques that you can use on the GNOME data. Please feel free to edit the document and add more ideas that could help improving our analysis.</p>
+</div>
+<div class="section" id="multi-user-server">
+<span id="jupyter-server"></span><h2>Multi-user Server<a class="headerlink" href="http://budker.berkeley.edu/~gnome/framework.html#multi-user-server" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id1">
+<a class="reference external image-reference" href="https://budker.uni-mainz.de:8000/hub/login"><img alt="_images/logo_jupyter.svg" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/logo_jupyter.svg" width="35%"></a>
+<p class="caption"><span class="caption-text">(Click on the above logo to access the <a class="reference external" href="https://budker.uni-mainz.de:8000/hub/login">JupyterHub server</a>)</span></p>
+</div>
+<p>A GNOME JupyterHub, or multi-user server has been created to allow each member to access the entire available dataset and do direct analysis on it. Members who do not have access to the server but wish to access it should send a request to me. Please note that members who are not part of the GNOME collaboration will not be granted access to the dataset but are free to use our software on their own data. The server can be accessed in two ways, either by accessing the <a class="reference external" href="https://budker.uni-mainz.de:8000/hub/login">server’s webpage</a>, or from your terminal through SSH:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">X</span> <span class="n">username</span><span class="nd">@budker</span><span class="o">.</span><span class="n">uni</span><span class="o">-</span><span class="n">mainz</span><span class="o">.</span><span class="n">de</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8022</span>
+</pre></div>
+</div>
+<p>You can also create an alias on your system PATH to directly connect to the Jupyter server from the terminal using the <code class="docutils literal"><span class="pre">sshpass</span></code> command as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sshpass</span> <span class="o">-</span><span class="n">p</span> <span class="s2">"yourpassword"</span> <span class="n">ssh</span> <span class="o">-</span><span class="n">X</span> <span class="n">yourusername</span><span class="nd">@budker</span><span class="o">.</span><span class="n">uni</span><span class="o">-</span><span class="n">mainz</span><span class="o">.</span><span class="n">de</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8022</span>
+</pre></div>
+</div>
+<p>While SSH is very handy for people using UNIX-like operating systems, this can become more complicated for those working on Windows machines. Fortunately, access to a terminal is also possible through the webpage, which means directly from your internet browser! This can be done by clicking on the New tab after login and select Terminal:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/jupyter1.png"><img alt="_images/jupyter1.png" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/jupyter1.png" style="width: 100%;"></a>
+</div>
+<p>You can then use the terminal window to access files and create new Python scripts for your analysis.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/jupyter2.png"><img alt="_images/jupyter2.png" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/jupyter2.png" style="width: 100%;"></a>
+</div>
+<p>Finally, in case you want to copy a repository from your Jupyter Hub account to your computer, for instance if you want to copy an analysis report you made with Jupyter notebook in the GNOME notebook, you can use the <code class="docutils literal"><span class="pre">scp</span></code> command on your terminal from the location you want to copy the remote directory to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">P</span> <span class="mi">8022</span> <span class="n">yourusername</span><span class="nd">@budker</span><span class="o">.</span><span class="n">uni</span><span class="o">-</span><span class="n">mainz</span><span class="o">.</span><span class="n">de</span><span class="p">:</span><span class="o">/</span><span class="n">absolute</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">remote</span><span class="o">/</span><span class="n">directory</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="large-dataset-analysis">
+<h2>Large Dataset Analysis<a class="headerlink" href="http://budker.berkeley.edu/~gnome/framework.html#large-dataset-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The following issue was raised by Wenhao Li by email on December 25, 2017:</p>
+<blockquote>
+<div><em>After I downloaded the 3-weeks-long data, I find it extremely slow in processing the data. Even simply plotting the sanity check results (which is 1/(512*4) smaller than the magnetic field data) over the run is a painful task. So I would like to know what is the proper workflow in dealing with several giga bytes data? My current workflow is to use python+h5py+pytables to combine all the minute-long hdf5 files into a large giga-bytes .h5 file so that I can do on-disk querying and searching. But it normally takes several hours to combine the data and after the combined data is ready, I couldn’t find an effective way to insert new data points to the table and maintain it. I do everything locally on my laptop (MacBook Pro) because I met with the similar slow processing problem on the jupyter server. Any suggestions and comments on this will be warmly welcomed!</em></div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="http://budker.berkeley.edu/~gnome/gdas.html" class="btn btn-neutral float-right" title="Data Analysis Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="http://budker.berkeley.edu/~gnome/upload.html" class="btn btn-neutral" title="Data Synchronizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © Copyright 2018, GNOME Collaboration (maintained by Vincent Dumont).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'latest update: 18/05/15',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/jquery.js.下载"></script>
+      <script type="text/javascript" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/underscore.js.下载"></script>
+      <script type="text/javascript" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/doctools.js.下载"></script>
+      <script type="text/javascript" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/MathJax.js.下载"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="./Analysis Framework — GNOME Notebook latest update_ 18_05_15 documentation_files/theme.js.下载"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+</body></html>

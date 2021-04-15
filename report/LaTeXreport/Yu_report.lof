@@ -1,0 +1,17 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Example of Generating time-domain series from frequency domain. We have to very careful with symmetry, which requires developers to be familiar with Fourier Transform. }}{10}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Create overlapping segments in signal series with constant length}}{12}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Power Spectral Density (PSD) Example}}{13}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 3D spectrum}}{14}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Display of drift over time}}{14}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Time domain signals (left) and its Welch\IeC {\textquoteright }s method's result (right)}}{16}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Spherical coordinates($r$, $\theta $,$\varphi $). From wiki}}{19}% 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Directions. Vectors indicate the directions, while making it hard to recognize directions when there's too many. Scatters indicate the directions in a more fresh way. }}{20}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {directions in vector form}}}{20}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {directions in scatter form}}}{20}% 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces The green vector is real direction of perturbation. Red dots indicate three best-match directions in the reference which match the real direction well.}}{21}% 

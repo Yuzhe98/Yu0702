@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}Abstract}{3}%
+\contentsline {section}{\numberline {2}Introduction}{3}%
+\contentsline {section}{\numberline {3}Introduction to Group Theory}{3}%
+\contentsline {subsection}{\numberline {3.1}Definition of Group}{3}%
+\contentsline {subsection}{\numberline {3.2}Abelian Group}{4}%
+\contentsline {subsection}{\numberline {3.3}Equivalence Relation}{4}%
+\contentsline {subsection}{\numberline {3.4}Homomorphism and Isomorphism}{4}%
+\contentsline {subsection}{\numberline {3.5}Linear Representation}{4}%
+\contentsline {subsubsection}{\numberline {3.5.1}Preparations in Linear Algebra}{4}%
+\contentsline {subsubsection}{\numberline {3.5.2}Details of Linear Representation}{5}%
+\contentsline {section}{\numberline {4}Construct Group with Pauli Sigma Matrices}{5}%
+\contentsline {subsection}{\numberline {4.1}Significance}{5}%
+\contentsline {subsection}{\numberline {4.2}Group Multiplication}{5}%
+\contentsline {subsection}{\numberline {4.3}Group Axioms}{6}%
+\contentsline {subsection}{\numberline {4.4}Uniqueness of the Constructed Group}{6}%
+\contentsline {subsection}{\numberline {4.5}Commutation Relation}{7}%
+\contentsline {subsection}{\numberline {4.6}Another Way to Use Pauli Matrix}{7}%
+\contentsline {section}{\numberline {5}Conclusion}{7}%

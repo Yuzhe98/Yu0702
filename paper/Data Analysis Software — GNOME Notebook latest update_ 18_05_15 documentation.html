@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://budker.berkeley.edu/~gnome/gdas.html#installation -->
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="en" slick-uniqueid="3" style=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Analysis Software — GNOME Notebook latest update: 18/05/15 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/theme.css" type="text/css">
+  
+
+  
+    <link rel="stylesheet" href="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/justify_text.css" type="text/css">
+  
+    <link rel="stylesheet" href="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/video_responsive.css" type="text/css">
+  
+
+  
+        <link rel="index" title="Index" href="http://budker.berkeley.edu/~gnome/genindex.html">
+        <link rel="search" title="Search" href="http://budker.berkeley.edu/~gnome/search.html">
+    <link rel="top" title="GNOME Notebook latest update: 18/05/15 documentation" href="http://budker.berkeley.edu/~gnome/index.html">
+        <link rel="next" title="gdas.construct_utc_from_metadata" href="http://budker.berkeley.edu/~gnome/generated/gdas.construct_utc_from_metadata.html">
+        <link rel="prev" title="Analysis Framework" href="http://budker.berkeley.edu/~gnome/framework.html"> 
+
+  
+  <script src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/modernizr.min.js.下载"></script>
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body class="wy-body-for-nav" role="document" style=""><div id="MathJax_Message" style="display: none;"></div>
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="http://budker.berkeley.edu/~gnome/index.html" class="icon icon-home"> GNOME Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest update: 18/05/15
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="http://budker.berkeley.edu/~gnome/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">General Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/people.html">People</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/bylaws.html">By-laws</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://budker.uni-mainz.de/gnome/">Live Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gitlab.html">Git Platform</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Literature Review</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/axions.html">Dark Matter &amp; Axions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/magnetometers.html">Atomic Magnetometers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/news.html">In the News</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/documentation.html">Books &amp; Articles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/conferences.html">Conferences &amp; Workshops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/presentations.html">Talks &amp; Posters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/manuscripts.html">Collaboration Papers</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ALP Signal &amp; Detection</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_search.html">Search Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_domain_wall.html">Domain wall expected signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_timing.html">Signal generation and timing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_distribution.html">Vector velocity distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_sensitivity.html">Sensitivity to transient signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_parameters.html">Translating data to parameter space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_array.html">Array sensitivity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/alp_beyond.html">Axion stars &amp; ALP bursts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Collaboration Meetings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/connect.html">How to connect?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/meetings.html">Meeting Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/bootcamp.html">Bootcamp 2016</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/fribourg17.html">Fribourg 2017</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Network Stations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_beijing.html">Beijing, China</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_berkeley1.html">Berkeley 1, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_berkeley2.html">Berkeley 2, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_daejeon.html">Daejeon, South Korea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_fribourg.html">Fribourg, Switzerland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_hayward.html">Hayward, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_hefei.html">Hefei, China</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_krakow.html">Krakow, Poland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_lewisburg.html">Lewisburg, USA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/station_mainz.html">Mainz, Germany</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Maintenance Protocol</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/characterization.html">Characterization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/instrumentation.html">Instrumentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://budker.berkeley.edu/~vincent/gnome/_materials/docs/report_low_pass_filter.pdf">Low-pass filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/manuals.html">Product Manuals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/fo_scan.html">Force Oscillation Scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/pulses.html">Pulse Injection</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Sanity Box</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html">Description of GNOME Interlock System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html#hardware">1 Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sanity_description.html#software">2 Software</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Acquisition</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gps_box.html">GPS Data Logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/sd_card.html">Secure Digital card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/structure.html">Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/algorithm.html">Data Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/daq.html">Acquisition Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/upload.html">Data Synchronizer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Analysis Tools</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/framework.html">Analysis Framework</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#"><span class="toctree-expand"></span>Data Analysis Software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#introduction">Introduction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#installation"><span class="toctree-expand"></span>Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#prerequisities">Prerequisities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#gwpy-and-pycbc">GWpy and PyCBC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#lalsuite-repository"><span class="toctree-expand"></span>LALsuite repository</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#github">Github</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#macports">MacPorts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#apt-get">apt-get</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#gdas-installation">GDAS installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#list-of-modules"><span class="toctree-expand"></span>List of modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#data-extraction-v1"><span class="toctree-expand"></span>Data extraction (v1)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.construct_utc_from_metadata.html">gdas.construct_utc_from_metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.fake_data.html">gdas.fake_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.fake_trigger_generator.html">gdas.fake_trigger_generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.get_data.html">gdas.get_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.impulse_data.html">gdas.impulse_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.time_convert.html">gdas.time_convert</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#data-extraction-v2"><span class="toctree-expand"></span>Data extraction (v2)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.readGNOME.getDataFromFile.html">gdas.readGNOME.getDataFromFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.readGNOME.getFListInRange.html">gdas.readGNOME.getFListInRange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.readGNOME.getDataInRange.html">gdas.readGNOME.getDataInRange</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#analysis-algorithms"><span class="toctree-expand"></span>Analysis algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.excess_power.html">gdas.excess_power</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#plotting-functions"><span class="toctree-expand"></span>Plotting functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.build_spec.html">gdas.plots.build_spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_activity.html">gdas.plots.plot_activity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_asd.html">gdas.plots.plot_asd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_bank.html">gdas.plots.plot_bank</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_filters.html">gdas.plots.plot_filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_spectrum.html">gdas.plots.plot_spectrum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_spectrogram.html">gdas.plots.plot_spectrogram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_spectrogram_from_ts.html">gdas.plots.plot_spectrogram_from_ts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_tiles_ts.html">gdas.plots.plot_tiles_ts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_tiles_tf.html">gdas.plots.plot_tiles_tf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_time_series.html">gdas.plots.plot_time_series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_triggers.html">gdas.plots.plot_triggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_ts.html">gdas.plots.plot_ts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_whitening.html">gdas.plots.plot_whitening</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#utilities"><span class="toctree-expand"></span>Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.utils.create_sound.html">gdas.utils.create_sound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.utils.burst_inject.html">gdas.utils.burst_inject</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#version-updates"><span class="toctree-expand"></span>Version Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#deprecated-modules">Deprecated modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#trigger-map-s-reader">Trigger map’s reader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/tutorial/report.html">GDAS examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/representation/report.html">Spectrogram vs. Scalogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/allan_deviation.html">Allan Standard Deviation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/excess_power.html">Excess Power Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/excess_power/notebook/report.html">Excess Power Search (new)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/impulse_response.html">Impulse Response Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/coincidence.html">Coincidence Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/coherence.html">Coherence Analysis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Feature Analysis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/tile_creation/report.html">Tile creation problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/psd_estimation/report.html">Segment’s length vs. PSD estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/fake_burst/report.html">Fake burst in artificial data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/earthquake/report.html">Seismic signatures in Fribourg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/data_features/earthquake_california/report.html">Seismic non-signature in California</a></li>
+</ul>
+<p class="caption"><span class="caption-text">All-station Science Runs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201603.html">2016 March</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201607.html">2016 July</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201611.html">2016 November</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201706.html">2017 June</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/run_201711.html">2017 November</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Analysis Reports</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201603_pps/report.html">Pulse-per-second test (Mar. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201603_asd.html">Allan Standard Deviation (Mar. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201611_bandwidth.html">Bandwidth measurements (Nov. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201611_excess_power/report.html">Fribourg Excess Power (Nov. ‘16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201706_bandwidth.html">Bandwidth measurements (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/analysis_201706_hector.html">Hector’s analysis (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_24hr_components/report.html">24-hour components (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/spectrograms/20170608_4-5AM.html">One hour spectrograms (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/wavelet/20170608.html">Wavelet analysis (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_systematic_trend/report.html">Systematic trend (Jun. ‘17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://budker.berkeley.edu/~gnome/_notebooks/science_runs/201706_histograms/report.html">Multi-period histograms (Jun. ‘17)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="http://budker.berkeley.edu/~gnome/index.html">GNOME Notebook</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="http://budker.berkeley.edu/~gnome/index.html">Docs</a> »</li>
+        
+      <li>Data Analysis Software</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="http://budker.berkeley.edu/~gnome/_sources/gdas.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="data-analysis-software">
+<h1>Data Analysis Software<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#data-analysis-software" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://gitlab.rlp.net/gnome/gdas"><img alt="_images/logo_gdas.png" class="align-right" src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/logo_gdas.png" style="width: 25%;"></a>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#introduction" id="id4">Introduction</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#installation" id="id5">Installation</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#list-of-modules" id="id6">List of modules</a></li>
+<li><a class="reference internal" href="http://budker.berkeley.edu/~gnome/gdas.html#version-updates" id="id7">Version Updates</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/gdas.html#id4">Introduction</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The GNOME Data Analysis Software (GDAS) is a program developed by the GNOME collaboration in an effort to ease the data analysis. This package contains functions useful for magnetic field signal processing, with a focus on Excess Power search analysis and application on the data for the GNOME collaboration, see <a class="reference external" href="http://budker.berkeley.edu/~gnome/_materials/papers/2013_pustelny.pdf">Pustelny et al. (2013)</a>. Here are some example tasks that can be (or will be soon) handled:</p>
+<ul class="simple">
+<li>Plot usual time series and spectrogram of magnetic field data.</li>
+<li>Perform excess power analysis and plot detected triggers in time-frequency map.</li>
+<li>Create artificial data for testing data analysis.</li>
+<li>Inject fake signal of different bandwidth and durations.</li>
+<li>Cross-correlation of continuous sine wave signals.</li>
+<li>Perform Allan Standard deviation.</li>
+</ul>
+<p>In this page, we show how to install all the necessary packages as well as the main GDAS program. We also provide brief descriptions of all the functions available in the software. As a working example of the GDAS program, one can refer to some of the <a class="reference external" href="http://budker.berkeley.edu/~gnome/_notebooks/analysis_tools/examples/report.html">working examples</a>.</p>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/gdas.html#id5">Installation</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisities">
+<h3>Prerequisities<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#prerequisities" title="Permalink to this headline">¶</a></h3>
+<p>The program requires the following general packages to run: <a class="reference external" href="http://numpy.scipy.org/">Numpy</a>, <a class="reference external" href="http://matplotlib.sourceforge.net/">Matplotlib</a>, <a class="reference external" href="http://www.scipy.org/">Scipy</a> and <a class="reference external" href="http://www.astropy.org/">Astropy</a>. The following LIGO-related packages are also required for full functionality: <a class="reference external" href="https://gwpy.github.io/">GWpy</a>, <a class="reference external" href="https://github.com/ligo-cbc/pycbc">PyCBC</a>, <a class="reference external" href="https://www.lsc-group.phys.uwm.edu/daswg/projects/glue.html">Glue</a>, <a class="reference external" href="http://software.ligo.org/docs/lalsuite/lal/index.html">LAL</a>, <a class="reference external" href="http://software.ligo.org/docs/lalsuite/lalburst/index.html">LALburst</a> and <a class="reference external" href="http://software.ligo.org/docs/lalsuite/lalsimulation/index.html">LALsimulation</a>.</p>
+</div>
+<div class="section" id="gwpy-and-pycbc">
+<h3>GWpy and PyCBC<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#gwpy-and-pycbc" title="Permalink to this headline">¶</a></h3>
+<p>Both <a class="reference external" href="https://gwpy.github.io/">GWpy</a> and <a class="reference external" href="https://github.com/ligo-cbc/pycbc">PyCBC</a> pacakges can easily be installed via the <a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a> package manager as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">gwpy</span>
+<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pycbc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lalsuite-repository">
+<h3>LALsuite repository<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#lalsuite-repository" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="github">
+<h4>Github<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#github" title="Permalink to this headline">¶</a></h4>
+<p>The remaining of the LIGO-related packages are part of the <a class="reference external" href="https://wiki.ligo.org/DASWG/LALSuite">LALsuite</a> which can be installed straightforwardly from the <a class="reference external" href="https://github.com/lscsoft/lalsuite">LALsuite Github repository</a> as follows:</p>
+<ol class="arabic">
+<li><p class="first">Clone the repository on your computer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lscsoft</span><span class="o">/</span><span class="n">lalsuite</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Configure and compile the entire software suite:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="mi">00</span><span class="n">boot</span>
+<span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">swig</span><span class="o">-</span><span class="n">python</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j</span> <span class="n">install</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>In case the configure step doesn’t work, e.g. <code class="docutils literal"><span class="pre">./configure</span> <span class="pre">failed</span> <span class="pre">for</span> <span class="pre">lalframe</span></code> error message, the installation of the following tools could fix it (shared by Xiang Zhang using Linux apt-get package manager):</p>
+<ol class="last arabic simple">
+<li>Install the <a class="reference external" href="http://www.fftw.org/">FFTW library</a>: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">fftw*</span></code></li>
+<li>Install the <a class="reference external" href="http://www.gnu.org/software/gsl/">GNU Scientific Library (GSL)</a>: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">gsl*</span></code></li>
+<li>Download and install the <a class="reference external" href="http://lappweb.in2p3.fr/virgo/FrameL/">Common Data Frame Format Library</a></li>
+<li>Install the <a class="reference external" href="http://www.swig.org/index.php">SWIG software development tool</a>: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">swig</span></code></li>
+<li>Download and install the <a class="reference external" href="https://www.lsc-group.phys.uwm.edu/daswg/projects/metaio.html">metaio library</a></li>
+<li>Install the <a class="reference external" href="http://xmlsoft.org/">libXML2 XML C parser and toolkit</a>: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libxml2*</span></code></li>
+<li>Clone and install the <a class="reference external" href="https://github.com/GNOME/glib">GLib application</a></li>
+<li>Install the <a class="reference external" href="https://support.hdfgroup.org/HDF5/">HDF5 library</a>: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libhdf5*</span></code></li>
+</ol>
+</div>
+</li>
+<li><p class="first">Pick up the environment by adding the following to your .profile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">lal</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">lalapps</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Both glue and pylal packages can then be installed and brought into the environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">glue</span><span class="o">/</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">glue</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="n">cd</span> <span class="n">pylal</span><span class="o">/</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pylal</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Note that the sourcing has to take place in that order and should be done each time the user wants to obtain the environment.</p>
+</div>
+<div class="section" id="macports">
+<h4>MacPorts<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#macports" title="Permalink to this headline">¶</a></h4>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">The LALsuite released code might be mangled or incomplete. Not recommend to install.</p>
+</div>
+<p>If a Mac user still decides to install the LALsuite via Macports, this can be done pretty easily. Detailed information can be found on <a class="reference external" href="https://wiki.ligo.org/DASWG/MacPorts">this page</a>. The <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a> package manager needs to be installed on your machine. The following commands should suffice to install the LALsuite package on your machine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">lscsoft</span><span class="o">-</span><span class="n">deps</span>
+<span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">glue</span>
+<span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">lalapps</span>
+</pre></div>
+</div>
+<p>The first command will install all the dependencies needed for the LIGO software to be installed. The following 2 commands will install the actual packages.</p>
+</div>
+<div class="section" id="apt-get">
+<h4>apt-get<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#apt-get" title="Permalink to this headline">¶</a></h4>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">The LALsuite released code might be mangled or incomplete. Not recommend to install.</p>
+</div>
+<p>Since the LIGO software is not a default package in the apt package manager system on Debian machine, additional steps will be needed. The following is extracted from the <a class="reference external" href="https://wiki.ligo.org/DASWG/LALSuiteInstall">LALSuite Installation page</a>. The first step is to add the following links to the source list located at <code class="docutils literal"><span class="pre">/etc/apt/sources.list</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">deb</span> <span class="p">[</span><span class="n">arch</span><span class="o">=</span><span class="n">amd64</span><span class="p">]</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">software</span><span class="o">.</span><span class="n">ligo</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">lscsoft</span><span class="o">/</span><span class="n">debian</span> <span class="n">jessie</span> <span class="n">contrib</span>
+<span class="n">deb</span><span class="o">-</span><span class="n">src</span> <span class="p">[</span><span class="n">arch</span><span class="o">=</span><span class="n">amd64</span><span class="p">]</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">software</span><span class="o">.</span><span class="n">ligo</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">lscsoft</span><span class="o">/</span><span class="n">debian</span> <span class="n">jessie</span> <span class="n">contrib</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal"><span class="pre">[arch=amd64]</span></code> is needed to fix the architecture problem in case it tries to install i386 version on 64-bit Debian. Once the sources have been added, you must first install all the dependencies as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">automake</span> <span class="n">autoconf</span> <span class="n">libtool</span> <span class="n">devscripts</span>
+</pre></div>
+</div>
+<p>The LIGO software can finally be installed using the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">lscsoft</span><span class="o">-</span><span class="nb">all</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gdas-installation">
+<h3>GDAS installation<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#gdas-installation" title="Permalink to this headline">¶</a></h3>
+<p>The GNOME Data Analysis Software can be installed very easily using the <a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a> package manager as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">gdas</span>
+</pre></div>
+</div>
+<p>This method allows for easy uninstallation. You can also simply download the tarball from the <a class="reference external" href="https://pypi.python.org/pypi/gdas">PyPI webpage</a>, unpack it and then do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>If you wish to install a specific version of the software, you can either download the tarball version from <a class="reference external" href="https://pypi.python.org/simple/gdas/">this page</a> or type the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">gdas</span><span class="o">==</span><span class="mf">0.4</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list-of-modules">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/gdas.html#id6">List of modules</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#list-of-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-extraction-v1">
+<h3>Data extraction (v1)<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#data-extraction-v1" title="Permalink to this headline">¶</a></h3>
+<div class="wy-table-responsive"><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.construct_utc_from_metadata.html#gdas.construct_utc_from_metadata" title="gdas.construct_utc_from_metadata"><code class="xref py py-obj docutils literal"><span class="pre">construct_utc_from_metadata</span></code></a>(datestr,&nbsp;t0str)</td>
+<td>Constructing UTC timestamp from metadata.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.fake_data.html#gdas.fake_data" title="gdas.fake_data"><code class="xref py py-obj docutils literal"><span class="pre">fake_data</span></code></a>([epoch,&nbsp;sample_rate,&nbsp;…])</td>
+<td>Create fake time series data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.fake_trigger_generator.html#gdas.fake_trigger_generator" title="gdas.fake_trigger_generator"><code class="xref py py-obj docutils literal"><span class="pre">fake_trigger_generator</span></code></a>([instrument])</td>
+<td>Generate fake trigger maps.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.get_data.html#gdas.get_data" title="gdas.get_data"><code class="xref py py-obj docutils literal"><span class="pre">get_data</span></code></a>(station,&nbsp;start_time,&nbsp;end_time[,&nbsp;…])</td>
+<td>Glob all files withing user-defined period and extract data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.impulse_data.html#gdas.impulse_data" title="gdas.impulse_data"><code class="xref py py-obj docutils literal"><span class="pre">impulse_data</span></code></a>([epoch,&nbsp;sample_rate,&nbsp;…])</td>
+<td>Create fake time series data.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.time_convert.html#gdas.time_convert" title="gdas.time_convert"><code class="xref py py-obj docutils literal"><span class="pre">time_convert</span></code></a>(*times)</td>
+<td>Convert string dates into UTC timestamps.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="data-extraction-v2">
+<h3>Data extraction (v2)<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#data-extraction-v2" title="Permalink to this headline">¶</a></h3>
+<div class="wy-table-responsive"><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.readGNOME.getDataFromFile.html#gdas.readGNOME.getDataFromFile" title="gdas.readGNOME.getDataFromFile"><code class="xref py py-obj docutils literal"><span class="pre">getDataFromFile</span></code></a>(fName[,&nbsp;convert])</td>
+<td>Gets magnetometer data from file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.readGNOME.getFListInRange.html#gdas.readGNOME.getFListInRange" title="gdas.readGNOME.getFListInRange"><code class="xref py py-obj docutils literal"><span class="pre">getFListInRange</span></code></a>(station,&nbsp;startTime,&nbsp;endTime)</td>
+<td>Get list of file names for GNOME experiment within a time period.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.readGNOME.getDataInRange.html#gdas.readGNOME.getDataInRange" title="gdas.readGNOME.getDataInRange"><code class="xref py py-obj docutils literal"><span class="pre">getDataInRange</span></code></a>(station,&nbsp;startTime,&nbsp;endTime)</td>
+<td>Get list of data in time range</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="analysis-algorithms">
+<h3>Analysis algorithms<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#analysis-algorithms" title="Permalink to this headline">¶</a></h3>
+<div class="wy-table-responsive"><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.excess_power.html#gdas.excess_power" title="gdas.excess_power"><code class="xref py py-obj docutils literal"><span class="pre">excess_power</span></code></a>(ts_data[,&nbsp;band,&nbsp;channel_name,&nbsp;…])</td>
+<td>Perform excess-power search analysis on magnetic field data.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="plotting-functions">
+<h3>Plotting functions<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#plotting-functions" title="Permalink to this headline">¶</a></h3>
+<div class="wy-table-responsive"><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.build_spec.html#gdas.plots.build_spec" title="gdas.plots.build_spec"><code class="xref py py-obj docutils literal"><span class="pre">build_spec</span></code></a>(data[,&nbsp;tmin,&nbsp;tmax,&nbsp;fmin,&nbsp;fmax,&nbsp;…])</td>
+<td>Plot multiplot figure with time series, PSD and spectrogram.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_activity.html#gdas.plots.plot_activity" title="gdas.plots.plot_activity"><code class="xref py py-obj docutils literal"><span class="pre">plot_activity</span></code></a>(full_seglist[,&nbsp;t0,&nbsp;t1])</td>
+<td>Plot full activity period for station.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_asd.html#gdas.plots.plot_asd" title="gdas.plots.plot_asd"><code class="xref py py-obj docutils literal"><span class="pre">plot_asd</span></code></a>(station,&nbsp;data)</td>
+<td>Plot Amplitude Spectral Density.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_bank.html#gdas.plots.plot_bank" title="gdas.plots.plot_bank"><code class="xref py py-obj docutils literal"><span class="pre">plot_bank</span></code></a>(fdb)</td>
+<td>Plot first filters from the filter bank in frequency domain.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_filters.html#gdas.plots.plot_filters" title="gdas.plots.plot_filters"><code class="xref py py-obj docutils literal"><span class="pre">plot_filters</span></code></a>(tdb,&nbsp;fmin,&nbsp;band)</td>
+<td>Plot first filters in time domain.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_spectrum.html#gdas.plots.plot_spectrum" title="gdas.plots.plot_spectrum"><code class="xref py py-obj docutils literal"><span class="pre">plot_spectrum</span></code></a>(fd_psd)</td>
+<td>Plot power spectral density</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_spectrogram.html#gdas.plots.plot_spectrogram" title="gdas.plots.plot_spectrogram"><code class="xref py py-obj docutils literal"><span class="pre">plot_spectrogram</span></code></a>(spec,&nbsp;dt,&nbsp;df,&nbsp;ymax,&nbsp;t0,&nbsp;t1)</td>
+<td>Plot standard Fourier-based spectrogram</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_spectrogram_from_ts.html#gdas.plots.plot_spectrogram_from_ts" title="gdas.plots.plot_spectrogram_from_ts"><code class="xref py py-obj docutils literal"><span class="pre">plot_spectrogram_from_ts</span></code></a>(ts[,&nbsp;fname])</td>
+<td>Plot spectrogram</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_tiles_ts.html#gdas.plots.plot_tiles_ts" title="gdas.plots.plot_tiles_ts"><code class="xref py py-obj docutils literal"><span class="pre">plot_tiles_ts</span></code></a>(tdb,&nbsp;ndof,&nbsp;df,&nbsp;sample_rate,&nbsp;t0,&nbsp;t1)</td>
+<td>Plot time series for several channels</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_tiles_tf.html#gdas.plots.plot_tiles_tf" title="gdas.plots.plot_tiles_tf"><code class="xref py py-obj docutils literal"><span class="pre">plot_tiles_tf</span></code></a>(tdb,&nbsp;ndof,&nbsp;df,&nbsp;ymax,&nbsp;…[,&nbsp;fname])</td>
+<td>Plot spectrogram for different tiles</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_time_series.html#gdas.plots.plot_time_series" title="gdas.plots.plot_time_series"><code class="xref py py-obj docutils literal"><span class="pre">plot_time_series</span></code></a>(data[,&nbsp;station,&nbsp;t0,&nbsp;t1,&nbsp;…])</td>
+<td>Generate a plot of the whole data time series</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_triggers.html#gdas.plots.plot_triggers" title="gdas.plots.plot_triggers"><code class="xref py py-obj docutils literal"><span class="pre">plot_triggers</span></code></a>([filename,&nbsp;fname])</td>
+<td>Plot excess power trigger results in a time-frequency frame.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_ts.html#gdas.plots.plot_ts" title="gdas.plots.plot_ts"><code class="xref py py-obj docutils literal"><span class="pre">plot_ts</span></code></a>(ts[,&nbsp;fname])</td>
+<td>Plot time series data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.plots.plot_whitening.html#gdas.plots.plot_whitening" title="gdas.plots.plot_whitening"><code class="xref py py-obj docutils literal"><span class="pre">plot_whitening</span></code></a>(ts_list[,&nbsp;station,&nbsp;t0,&nbsp;t1,&nbsp;…])</td>
+<td>Generate a spectrogram plot and normalized spectrogram.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="utilities">
+<h3>Utilities<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#utilities" title="Permalink to this headline">¶</a></h3>
+<div class="wy-table-responsive"><table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.utils.create_sound.html#gdas.utils.create_sound" title="gdas.utils.create_sound"><code class="xref py py-obj docutils literal"><span class="pre">create_sound</span></code></a>(ts)</td>
+<td>Create sound based on the data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="http://budker.berkeley.edu/~gnome/generated/gdas.utils.burst_inject.html#gdas.utils.burst_inject" title="gdas.utils.burst_inject"><code class="xref py py-obj docutils literal"><span class="pre">burst_inject</span></code></a>(ts_data[,&nbsp;loc,&nbsp;duration,&nbsp;hrss,&nbsp;…])</td>
+<td>Inject burst signal in time series data</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="section" id="version-updates">
+<h2><a class="toc-backref" href="http://budker.berkeley.edu/~gnome/gdas.html#id7">Version Updates</a><a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#version-updates" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="deprecated-modules">
+<h3>Deprecated modules<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#deprecated-modules" title="Permalink to this headline">¶</a></h3>
+<p>Below we list the modules that became deprecated over time:</p>
+<div class="wy-table-responsive"><table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="31%">
+<col width="43%">
+<col width="15%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Package</th>
+<th class="head">Deprecated module</th>
+<th class="head">New module location</th>
+<th class="head">GDAS version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GWpy v0.1</td>
+<td><code class="docutils literal"><span class="pre">gwpy.spectrum.Spectrum</span></code></td>
+<td><code class="docutils literal"><span class="pre">gwpy.frequencyseries.FrequencySeries</span></code></td>
+<td>v0.4.0</td>
+</tr>
+<tr class="row-odd"><td>GWpy v0.1</td>
+<td><code class="docutils literal"><span class="pre">gwpy.plotter.SpectrumPlot</span></code></td>
+<td><code class="docutils literal"><span class="pre">gwpy.plotter.FrequencySeriesPlot</span></code></td>
+<td>v0.4.0</td>
+</tr>
+<tr class="row-even"><td>GWpy v0.1</td>
+<td><code class="docutils literal"><span class="pre">gwpy.table.lsctables</span></code></td>
+<td><code class="docutils literal"><span class="pre">gwpy.table.EventTable</span></code></td>
+<td>v0.4.0</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="trigger-map-s-reader">
+<h3>Trigger map’s reader<a class="headerlink" href="http://budker.berkeley.edu/~gnome/gdas.html#trigger-map-s-reader" title="Permalink to this headline">¶</a></h3>
+<p>In GWpy v0.1 and earlier versions, the <code class="docutils literal"><span class="pre">gwpy.table.lsctables</span></code> module was originally just a layer on top of the original (and still intact) <code class="docutils literal"><span class="pre">glue.ligolw.lsctables</span></code> module, and the excess power trigger maps were read using the <code class="docutils literal"><span class="pre">gwpy.table.lsctables.SnglBurstTable.read()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gwpy.table.lsctables</span> <span class="k">import</span> <span class="n">SnglBurstTable</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">SnglBurstTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">'trigger_results.xml.gz'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In later GWpy versions, the use of <span class="guilabel">LIGO_LW</span> table classes in GWpy was removed in favour of the new <span class="guilabel">EventTable</span> object, which inherits directly from <code class="docutils literal"><span class="pre">astropy.table.Table</span></code>. One can now read and plot a trigger file in much the same way as before (<span class="guilabel">LIGO_LW</span> files are still supported, just not any extensions to the <code class="docutils literal"><span class="pre">glue.ligolw</span></code> objects):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gwpy.table</span> <span class="k">import</span> <span class="n">EventTable</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">EventTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">'trigger_results.xml.gz'</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'ligolw.sngl_burst'</span><span class="p">)</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xcol</span><span class="p">,</span> <span class="n">ycol</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that in the case of GNOME, we are using <span class="guilabel">LIGO_LW</span> XML files as inputs, we therefore need to specify the format as followed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">format</span><span class="o">=</span><span class="s1">'ligolw.sngl_burst'</span>
+</pre></div>
+</div>
+<p>Finally, if one wants to plot the time (as in the GPS time of an event), that column is not directly written into the files, and is not interpolated by the reader, so one needs to create it on the fly, as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s1">'peak_time'</span><span class="p">]</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="s1">'peak_time_ns'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'time'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="http://budker.berkeley.edu/~gnome/generated/gdas.construct_utc_from_metadata.html" class="btn btn-neutral float-right" title="gdas.construct_utc_from_metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="http://budker.berkeley.edu/~gnome/framework.html" class="btn btn-neutral" title="Analysis Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © Copyright 2018, GNOME Collaboration (maintained by Vincent Dumont).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'latest update: 18/05/15',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/jquery.js.下载"></script>
+      <script type="text/javascript" src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/underscore.js.下载"></script>
+      <script type="text/javascript" src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/doctools.js.下载"></script>
+      <script type="text/javascript" src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/MathJax.js.下载"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="./Data Analysis Software — GNOME Notebook latest update_ 18_05_15 documentation_files/theme.js.下载"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+</body></html>
