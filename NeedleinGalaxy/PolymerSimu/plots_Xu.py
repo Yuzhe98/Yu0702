@@ -147,8 +147,8 @@ def Rhist_Xu(
         colnum=2,
         binumber=100,
         astart = 1000,
-        nu=0.753285,
-        lnk = -0.223803,
+        nu=0.7532,
+        lnk = -0.223,
         picname="Rplot-2D",
         freq_log=True,
         save_opt=False
@@ -170,10 +170,11 @@ def Rhist_Xu(
     arrnum = len(arr)
     avalue = np.zeros(arrnum)
     varalue = np.zeros(arrnum)
-
+    stdvalue = np.zeros(arrnum)
     for i in range(arrnum):
         avalue[i] = np.log(np.mean(arr[i, :]))
-        varalue[i] = np.var(np.log(arr[i, :]))**0.5
+        varalue[i] = np.var(np.log(arr[i, :]))
+        stdvalue[i] = np.std(np.log(arr[i, :]))
 
     print("data ={")
     for i in range(txtnum):
@@ -184,7 +185,7 @@ def Rhist_Xu(
 
     arr_rescaled = arr
     for i in range(arrnum):
-        arr_rescaled[i] = arr_rescaled[i] / (plen[i]) ** (2*nu)
+        arr_rescaled[i] = arr_rescaled[i]**0.5 / (plen[i]) ** (.75)
 
     print(len(arr))
     print(len(arr[0]))
@@ -207,8 +208,7 @@ def Rhist_Xu(
     for i in range(arrnum):
         ax6.scatter(bin_edges[0:len(bin_edges) - 1] + 0.5 * remax / binumber, histct[i], s=10, marker=markers[i],
                     label="N=%d" % (200.0 + 200.0 * i))
-
-
+    ax6.set_xlim(-0.15,2.9)
     ax6.set_ylabel('$f(ρ) = N^{ν} \dot P_N(R=ρN^{ν})$')
     ax6.set_xlabel('$ρ = R*N^{-ν}$')
     ax6.legend(loc='upper right')
@@ -223,11 +223,11 @@ def Rhist_Xu(
     ax7 = fig.add_subplot(gs[0, 0])
 
     #plt.errorbar(a, b, yerr=c, fmt="o", color="r")
-    ax7.errorbar(np.log(plen**2), avalue,yerr=varalue, fmt="o",markersize = 2) #s=30,
+    ax7.errorbar(np.log(plen**2), avalue,yerr=stdvalue, fmt="o",markersize = 2) #s=30,
     #-0.16966 + 0.752773 x
     ax7xaxis = np.linspace(start=-0.03, stop=14.33, num=1000, endpoint=True)
     ax7yaxis = lnk + nu * ax7xaxis
-    ax7.text(0.2, 10, "$%g + %g ln(N^2) $"%(lnk,nu), color='green')
+    ax7.text(1.2, 9, "$%g + %g ln(N^2) $"%(lnk,nu), color='green')
     ax7.plot(ax7xaxis, ax7yaxis, c='green')
 
     #ax7.set_xlim(-0.03, 7.33)

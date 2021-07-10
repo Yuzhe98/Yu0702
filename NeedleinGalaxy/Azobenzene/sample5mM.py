@@ -19,14 +19,14 @@ print(dataarr1.shape)
 #labelarr = np.array(["0mM","data01mM","data02mM","data03mM","data04mM","data05mM","data1mM","data2mM","data5mM","data5mM2"])
 labelarr1 = np.array(["UV 0 min","UV 1 min","UV 11 min","UV 21 min","UV 31 min","UV 41 min","UV 51 min"\
                       ,"UV 51 min + Blue 10 min","UV 51 min + Blue 20 min","UV 51 min + Blue 30 min"\
-                      ,"UV 51 min + Blue 40 min","UV 51 min + Blue 50 min","UV 51 min + Blue 60 min"\
-                      ,"UV 51 min + Blue 70 min"])
+                      ,"UV 51 min + High-V Blue 40 min","UV 51 min + High-V Blue 50 min","UV 51 min + High-V Blue 60 min"\
+                      ,"UV 51 min + High-V Blue 70 min"])
 plt.rcParams.update({'font.size': 18})
 fig = plt.figure(figsize=(13.82, 5.09))  #
 gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios=heights
 fig.subplots_adjust(left=0.076, top=0.95, right=0.967,bottom=0.152, wspace=0.198, hspace=0.1)
 ax0 = fig.add_subplot(gs[0, 0])
-for i in [0,6,12]:  #
+for i in [0,6,13]:  #
     ax0.plot(dataarr1[i][0,:],dataarr1[i][1,:]/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'#ax0.legend(loc='upper right')
 ax0.set_xlabel('Wavelength / nm')  #
 ax0.set_ylabel('Absorption')  #1-Transmittance / %

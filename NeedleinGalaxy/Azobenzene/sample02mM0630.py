@@ -33,8 +33,8 @@ labelarr1 = np.array(["0 min",  # 563 0
                       "Blue 10 min",  # 570 7
                       "UV 15 min",  #  8
                       "UV 20 min",  #  9
-                      "UV 20 min + Blue 2 min",  #  10
-                      "UV 20 min + Blue 5 min",  #  11
+                      "UV 20 min + High-V Blue 2 min",  #  10
+                      "UV 20 min + High-V Blue 5 min",  #  11
                       "UV 20 min + Blue 5 min + Darkness 5 min",  #
                       "UV 20 min + Blue 5 min + Room light 1 min",  #
                       "UV 20 min + Blue 5 min + Room light 5 min", #
@@ -42,13 +42,15 @@ labelarr1 = np.array(["0 min",  # 563 0
                         ])
 
 # sample02mM0630 blue 2.80 V
+
+
 plt.rcParams.update({'font.size': 18})
 fig = plt.figure(figsize=(13.82, 5.09))
 gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios=heights
 fig.subplots_adjust(left=0.076, top=0.95, right=0.967,bottom=0.152, wspace=0.198, hspace=0.1)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [2,3,4,5]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(190,610)
 ax0.set_ylim(-0.025,0.445)
 ax0.set_xlabel('Wavelength / nm')  #, fontsize=18
@@ -63,7 +65,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.295,bottom=0.136, right=0.943, top=0.974, wspace=0.2, hspace=0.2)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [2,3,4,5]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(412,454.4)
 ax0.set_ylim(0.00220,0.00443)
 plt.savefig("D:\\Mainz\\JGU\\Specmeter\\report\\sample02mM0630Blue28Vzoomin2.png",format='png')
@@ -75,7 +77,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.22,bottom=0.157, right=0.971, top=0.974, wspace=0.2, hspace=0.2)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [2,3,4,5]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(305,326.6)
 ax0.set_ylim(0.2438,0.2708)
 plt.savefig("D:\\Mainz\\JGU\\Specmeter\\report\\sample02mM0630Blue28Vzoomin1.png",format='png')
@@ -88,7 +90,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.076, top=0.95, right=0.967,bottom=0.152, wspace=0.198, hspace=0.1)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [5,6,7]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(190,610)
 ax0.set_ylim(-0.025,0.445)
 ax0.set_xlabel('Wavelength / nm')  #, fontsize=18
@@ -103,7 +105,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.295,bottom=0.136, right=0.943, top=0.974, wspace=0.2, hspace=0.2)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [5,6,7]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(417,452.4)
 ax0.set_ylim(0.00275,0.00468)
 plt.savefig("D:\\Mainz\\JGU\\Specmeter\\report\\sample02mM0630Bluezoomin2.png",format='png')
@@ -115,7 +117,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.22,bottom=0.157, right=0.971, top=0.974, wspace=0.2, hspace=0.2)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [5,6,7]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(305,326.6)
 ax0.set_ylim(0.2387,0.2661)
 plt.savefig("D:\\Mainz\\JGU\\Specmeter\\report\\sample02mM0630Bluezoomin1.png",format='png')
@@ -130,7 +132,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.076, top=0.95, right=0.967,bottom=0.152, wspace=0.198, hspace=0.1)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [0,1]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(190,610)
 ax0.set_ylim(-0.025,0.425)
 ax0.set_xlabel('Wavelength / nm')  #, fontsize=18
@@ -145,7 +147,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.295,bottom=0.136, right=0.943, top=0.974, wspace=0.2, hspace=0.2)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [0,1]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(420,455.4)
 ax0.set_ylim(0.00182,0.00380)
 plt.savefig("D:\\Mainz\\JGU\\Specmeter\\report\\sample02mM0630UVLowVzoomin2.png",format='png')
@@ -157,7 +159,7 @@ gs = gridspec.GridSpec(nrows=1, ncols=1)  # , width_ratios=widths, height_ratios
 fig.subplots_adjust(left=0.22,bottom=0.157, right=0.971, top=0.974, wspace=0.2, hspace=0.2)
 ax0 = fig.add_subplot(gs[0, 0])
 for i in [0,1]:
-    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:]-baseline0629[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
+    ax0.plot(dataarr1[i][0,:], (dataarr1[i][1,:]+baseline0630[1,:])/np.log(10),label = labelarr1[i])  #,label = labelarr[i]  ,c='grey'
 ax0.set_xlim(300,334.6)
 ax0.set_ylim(0.2387,0.2837)
 plt.savefig("D:\\Mainz\\JGU\\Specmeter\\report\\sample02mM0630UVLowVzoomin1.png",format='png')

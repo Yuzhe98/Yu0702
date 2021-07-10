@@ -6,12 +6,12 @@ import matplotlib.gridspec as gridspec
 
 def Rplot(
         fpath="C:\\Users\\zhenf\\source\\repos\\PolymerSimulation\\PolymerSimulation\\20210629test\\R_statistic\\overnight\\",
-        fname=np.array(["Endtoend_radius#plen100#numstep100000#time",
+        fname=np.array([#"Endtoend_radius#plen100#numstep100000#time",
                         "Endtoend_radius#plen200#numstep100000#time",
                         "Endtoend_radius#plen400#numstep100000#time",
                         "Endtoend_radius#plen600#numstep100000#time",
-                        "Endtoend_radius#plen800#numstep100000#time"
-                        ,"Endtoend_radius#plen1000#numstep100000#time"
+                        "Endtoend_radius#plen800#numstep100000#time",
+                        "Endtoend_radius#plen1000#numstep100000#time"
                         ]),
         #"Endtoend_radius#plen10#numstep100000#time","Endtoend_radius#plen20#numstep100000#time",\
         #                "Endtoend_radius#plen50#numstep100000#time", "Endtoend_radius#plen100#numstep100000#time", \
@@ -22,14 +22,14 @@ def Rplot(
         #
         #
 
-        fname1=np.array(["Endtoend_radius#plen200#numstep50000#time", "Endtoend_radius#plen400#numstep50000#time", \
-                        "Endtoend_radius#plen600#numstep50000#time", "Endtoend_radius#plen800#numstep50000#time", \
+        fname1=np.array(["Endtoend_radius#plen200#numstep50000#time", "Endtoend_radius#plen400#numstep50000#time",
+                        "Endtoend_radius#plen600#numstep50000#time", "Endtoend_radius#plen800#numstep50000#time",
                         "Endtoend_radius#plen1000#numstep50000#time"]),
-        fname2=np.array(["Endtoend_radius#plen200#numstep100000#time", "Endtoend_radius#plen400#numstep100000#time", \
-                        "Endtoend_radius#plen600#numstep100000#time", "Endtoend_radius#plen800#numstep100000#time", \
+        fname2=np.array(["Endtoend_radius#plen200#numstep100000#time", "Endtoend_radius#plen400#numstep100000#time",
+                        "Endtoend_radius#plen600#numstep100000#time", "Endtoend_radius#plen800#numstep100000#time",
                         "Endtoend_radius#plen1000#numstep100000#time"]),
-        fname3=np.array(["Endtoend_radius#plen200#numstep1000000#time", "Endtoend_radius#plen400#numstep1000000#time", \
-                        "Endtoend_radius#plen600#numstep1000000#time", "Endtoend_radius#plen800#numstep1000000#time", \
+        fname3=np.array(["Endtoend_radius#plen200#numstep1000000#time", "Endtoend_radius#plen400#numstep1000000#time",
+                        "Endtoend_radius#plen600#numstep1000000#time", "Endtoend_radius#plen800#numstep1000000#time",
                         "Endtoend_radius#plen1000#numstep1000000#time"]),
         rownum=1,
         colnum=1,
@@ -39,30 +39,47 @@ def Rplot(
         save_opt=False
 
 ):
-    polylen = np.array([100,200,400,600,800,1000])
-    txtnum = len(fname)
+    polylen = np.array([200,400,600,800,1000])
+    txtnum = len(polylen)
     arr = []
     for i in range(txtnum):
-        arr.append(np.loadtxt(fpath + fname[i] + ".txt", dtype=float)[10:])
+        print(fname[i])
+        arr.append(np.loadtxt(fpath + fname[i] + ".txt", dtype=int))
     arr = np.array(arr)
     print(arr.shape)
     print(arr[0].shape)
     nu = 0.6
     avalue = np.zeros(txtnum)
     varalue = np.zeros(txtnum)
+    stdvalue = np.zeros(txtnum)
     for i in range(txtnum):
-        avalue[i] = np.mean(arr[i])
-        varalue[i] = np.var(arr[i])**0.5
+        avalue[i] = np.mean(arr[i][10000:],dtype=np.float64)
+        stdvalue[i] = np.std(arr[i][10000:])
+        #varalue[i] = np.var(arr[i][10000:])**0.5
+    #print("Log[%f]}};" % (avalue[0] ** 0.5))
 
+    #print(",{Log[%g], Log[%f]}};" % (polylen[txtnum - 1], avalue[txtnum - 1] ** 0.5))
+    #i=0
     for i in range(txtnum):
-        print("%g, %g, %g" % (polylen[i], avalue[i], varalue[i]))
+        print("%g, %g, %g" % (polylen[i], avalue[i], stdvalue[i]))
 
-    print("data = {{Log[%g], Log[%g]}"%(polylen[0], avalue[0]**0.5))
-    for i in range(txtnum-2):
-        print(",{Log[%g], Log[%g]}" % (polylen[i+1], avalue[i+1]**0.5))
-    print(",{Log[%g], Log[%g]}};" % (polylen[txtnum- 1], avalue[txtnum - 1]**0.5))
-    '''
-    fig = plt.figure(figsize=(3.8, 2.8))
+    print("data = {{Log[%g], Log[%f]}"%(polylen[0], avalue[0]**0.5))
+    for i in range(txtnum-3):
+        print(",{Log[%g], Log[%f]}" % (polylen[i+1], avalue[i+1]**0.5))
+    print(",{Log[%g], Log[%f]}};" % (polylen[txtnum- 1], avalue[txtnum - 1]**0.5))
+
+    step = 10**6
+    for j in range(9):
+
+        print("%g *10^6:%g *10^6"%((j+1),(j+2)))
+        print("data = {{Log[%g], Log[%f]}" % (polylen[0], np.mean(arr[0][(j+1)*step:(j+2)*step]) ** 0.5))
+        for i in range(txtnum - 2):
+            print(",{Log[%g], Log[%f]}" % (polylen[i + 1], np.mean(arr[i + 1][(j+1)*step:(j+2)*step]) ** 0.5))
+        print(",{Log[%g], Log[%f]}};" % (polylen[txtnum - 1], np.mean(arr[txtnum - 1][(j+1)*step:(j+2)*step]) ** 0.5))
+
+
+    
+    '''fig = plt.figure(figsize=(3.8, 2.8))
     gs = gridspec.GridSpec(nrows=rownum, ncols=colnum)  # , width_ratios=widths, height_ratios=heights
     fig.subplots_adjust(left=0.193, top=0.95, right=0.967,
                         bottom=0.18, wspace=0.198, hspace=0.1)
@@ -113,19 +130,19 @@ def Rplot(
 def Rhist(
         fpath="C:\\Users\\zhenf\\source\\repos\\PolymerSimulation\\PolymerSimulation\\20210629test\\R_statistic\\overnight\\",
         fname=np.array([
-                        "Endtoend_radius#plen200#numstep100000#time",
-                        "Endtoend_radius#plen400#numstep100000#time",
-                        "Endtoend_radius#plen600#numstep100000#time",
-                        "Endtoend_radius#plen800#numstep100000#time",
-                        "Endtoend_radius#plen1000#numstep100000#time"
+                        "Endtoend_radius#plen200#numstep10000000#time",
+                        "Endtoend_radius#plen400#numstep10000000#time",
+                        "Endtoend_radius#plen600#numstep10000000#time",
+                        "Endtoend_radius#plen800#numstep10000000#time",
+                        "Endtoend_radius#plen1000#numstep10000000#time"
                         ]),
         flen=10000,
         rownum=1,
         colnum=2,
         binumber=100,
         xlimit=5,
-        nu = 0.601719,
-        lnk = .0263426,
+        nu = 0.5926,
+        lnk = 0.076,
         astart = 10000,
         picname="Rplot",
         freq_log=True,
@@ -136,36 +153,25 @@ def Rhist(
     txtnum = len(fname)
     arr = []
     for i in range(txtnum):
-        '''
-        print(fname[i])
-        rvalues = np.loadtxt(fpath + fname[i] + ".txt", dtype=float)
-        ravg = np.mean(rvalues)
-        rvar = np.var(rvalues)**0.5
-        print(rvalues.shape)
-        print(ravg)
-        print(rvar)
-
-        rvalues = np.log(rvalues)
-        ravg = np.mean(rvalues)
-        rvar = np.var(rvalues) ** 0.5
-        print(rvalues.shape)
-        print(ravg)
-        print(rvar)
-        '''
-        arr.append(np.loadtxt(fpath + fname[i] + ".txt", dtype=float)[100:]) #
-
+        print(fname[i] + ".txt")
+        arr.append(np.loadtxt(fpath + fname[i] + ".txt", dtype=int)[10000:]) #
 
     arr = np.array(arr)
 
     avalue = np.zeros(txtnum)
     varalue = np.zeros(txtnum)
+    stdvalue = np.zeros(txtnum)
+    #avalue = np.array([270.657])
+    ''''''
     for i in range(txtnum):
         avalue[i] = np.log(np.mean(arr[i, :]))
         varalue[i] = np.var(np.log(arr[i, :]))
+        stdvalue[i] = np.std(np.log(arr[i, :]))
+    print("std of log")
+    print(stdvalue)
 
-    arr_rescaled = arr
     for i in range(txtnum):
-        arr_rescaled[i] = arr_rescaled[i]**0.5/(plen[i]**(nu))
+        arr[i] = arr[i]**0.5/(plen[i]**(0.6))
 
     print(len(arr))
     print(len(arr[0]))
@@ -176,7 +182,7 @@ def Rhist(
     #histacc = np.zeros((txtnum, binumber))
 
     for i in range(txtnum):
-        histct[i], bin_edges = np.histogram(arr_rescaled[i, :], bins=binumber, range=(0, remax), density=True)
+        histct[i], bin_edges = np.histogram(arr[i, :], bins=binumber, range=(0, remax), density=True)
 
     markers = np.array([".", "x", "D", "+", "^", "<", ">", "p","*","v","P","8","4","3","2","1"])
 
@@ -188,7 +194,7 @@ def Rhist(
     for i in range(txtnum):
         ax6.scatter(bin_edges[0:len(bin_edges)-1]+0.5*remax/binumber, histct[i], s=10, marker=markers[i], label="N=%d" % plen[i])
         #ax6.plot(bin_edges[1:len(bin_edges)], histct[i], label="N=%d" % (200 + 200 * i))
-
+    ax6.set_xlim(-0.15,2.9)
     # ax6.set_xscale('log')
     ax6.set_ylabel('$f(ρ) = N^{ν} \dot P_N(R=ρN^{ν})$')  # f(\mathbf{ρ}) = N^{ν} \dot P_N(\mathbf{R}=\mathbf{ρ}N^{ν})
     ax6.set_xlabel('$ρ = R*N^{-ν}$')
@@ -204,7 +210,7 @@ def Rhist(
     fig.subplots_adjust(left=0.193, top=0.95, right=0.967,
                         bottom=0.18, wspace=0.198, hspace=0.1)
     ax7= fig.add_subplot(gs[0, 0])
-    ax7.errorbar(np.log(plen**2), avalue, yerr=varalue,fmt="o",markersize=2)  # s=30,
+    ax7.errorbar(np.log(plen**2), avalue, yerr=stdvalue,fmt="o",markersize=2)  # s=30,
     #ax7.scatter(np.log(plen),avalue, s=30, marker="o")
     #-0.111651 + 0.639912 x
     ax7xaxis = np.linspace(start=-0.03,stop=14.33,num=1000,endpoint=True)
