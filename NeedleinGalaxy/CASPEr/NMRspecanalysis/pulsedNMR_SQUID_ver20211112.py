@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import numpy as np
 import pandas as pd
 from lmfit import Parameters, minimize, report_fit, Model
@@ -7,14 +8,6 @@ import h5py
 import sys
 import scipy as sp
 
-acqtime = 1.0            # in s      #1000ms
-samplefreq = 13.29e3    # in Hz     #13.39kHz
-pulselength = 1         # in s      #10**6us
-acqdelay = 0.1         # in s      #100000us
-pointsofpulselength = int(pulselength * samplefreq)
-pointsofacqdelay = acqdelay * samplefreq
-pointsofacqtime = acqtime * samplefreq
-filename = "D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\datastream_000/stream_00000.h5"
 
 def loadStream(filename):
     """load file
@@ -31,7 +24,7 @@ def loadStream(filename):
     return dataX, dataY, pulseData
 
 
-def findendofpulse(dataX = [], dataY = [], pulseData = [], trigger = 0):
+def findpulse(dataX = [], dataY = [], pulseData = [], trigger = 0):
     """
     Args:
         dataX (np.list, optional): . Defaults to [].
@@ -40,7 +33,8 @@ def findendofpulse(dataX = [], dataY = [], pulseData = [], trigger = 0):
         trigger (int, optional): [0: start of TTL trigger, 1: end of TTL, 2: start of pulse, 3: end of pulse]. Defaults to 0.
     Returns:
         [array]: [all indices indicate the end the pulse]
-    """    
+    """
+    startofpulse = []
     endofpulse = []
     if trigger == 0:
         trigger_val = 2
@@ -61,28 +55,13 @@ def findendofpulse(dataX = [], dataY = [], pulseData = [], trigger = 0):
         dataXY = np.abs(dataX + 1j*dataY)
         trigger_val = 0.04
         endofpulse = np.flatnonzero((dataXY[1:] < trigger_val) & (dataXY[:-1] > trigger_val))+1
-    return endofpulse
-
-
-def FT(dataX, dataY):
-    """FT
-    Args:
-        dataX (np.array): 
-        dataY (np.array): 
-    Returns:
-        (np.array, np.array): frequencies, spectrum (sorted)
-    """
-    
-    # do FFT
-    FIDComplex = dataX + 1j*dataY
-    FFTOfBlock = np.fft.fft(FIDComplex)
-
-    numberOfPoints = len(dataX)   
-    PSD = 2*np.abs(FFTOfBlock)**2/(numberOfPoints*samplefreq)
-    #PSD = (np.abs(FFTOfBlock)**2)*numberOfPoints/(samplefreq)
-    frequencies = np.fft.fftfreq(numberOfPoints, d = 1/samplefreq) # Set d to dwell time in s
-
-    return np.sort(frequencies), PSD[np.argsort(frequencies)]
+    elif trigger == 4:
+        trigger_val = np.amax(pulseData)/2.
+        startofpulse = np.flatnonzero((pulseData[1:] > trigger_val) & (pulseData[:-1] < trigger_val))
+        endofpulse = np.flatnonzero((pulseData[1:] < trigger_val) & (pulseData[:-1] > trigger_val))
+    else:
+        raise ValueError('trigger value out of range')
+    return startofpulse, endofpulse
 
 
 def Lorentzian(x, center, gamma, A, offset):
@@ -92,105 +71,289 @@ def Lorentzian(x, center, gamma, A, offset):
 def LIAFilterPSD(frequency, Tn, order):
     return np.abs(1/(1 + 2*np.pi*1j*frequency*Tn)**order)**2
 
+def stdLIAPSD(
+        data_x,
+        data_y,
+        dataunit = 'V',  # 'muV', 'nV'
+        samprate = 1e3,  # in Hz
+        dfreq = 0,  # in Hz
+        attenuation = 6,  # in dB. Power ratio (10^(attenuation/10)). Positive value means signal was attenuated beforehand.
+        window = 'rectangle'  # Hanning, Hamming, Blackman
+):
+    '''
+    Based on https://holometer.fnal.gov/GH_FFT.pdf
+    :param data_x:
+    :param data_y:
+    :param dataunit:
+    :param samprate:
+    :param dfreq:
+    :param attenuation:
+    :param window:
+    :return:
+    '''
+    if len(data_x) != len(data_y):
+        raise ValueError('len(data_x) != len(data_y)')
 
-def plot(n, caption=''):
-    global pointsofpulselength
-    global filename
-    sys.stdout = open(filename[:11]+'result.txt', 'w+')
-    outputfile = filename[:-3]+".txt"
+    if window == 'rectangle':
+        windowfunction = np.ones(len(data_x))
+    elif window == 'Hanning' or window == 'hanning' or window == 'Han' or window == 'han':
+        windowfunction = np.hanning(len(data_x))
+    elif window == 'Hamming' or window == 'hamming':
+        windowfunction = np.hamming(len(data_x))
+    elif window == 'Blackman' or window == 'blackman':
+        windowfunction = np.blackman(len(data_x))
+    else:
+        raise ValueError('Window function not found')
+    #S1 = np.sum(windowfunction)
+    S2 = np.sum(windowfunction**2)
+    FFT = np.fft.fft((data_x + 1j * data_y) * windowfunction)
+    PSD = 10.0**(attenuation/10.) * 2.0 * np.abs(FFT) ** 2 / (S2 * samprate)
+    frequencies = np.fft.fftfreq(len(data_x), d=1 / samprate)  # Set d to dwell time in s
+    frequencies += dfreq
+    return np.sort(frequencies), PSD[np.argsort(frequencies)]
 
-    plt.style.use('seaborn-colorblind')
-    plt.rcParams['figure.figsize'] = [16, 9]
-    plt.rcParams['font.size'] = 16
+def pulseNMRplot(
+        filename,
+        dfreq = 0,  # in Hz
+        samprate = 13e3,  # in Hz
+        pulselength = 3.0,
+        acqdelay = 0.1,
+        acqtime = 1,
+        showtimedomain = True,
+        showacqdata = True,
+        showfreqdomain = True,
+        PSDorASD = 'ASD',
+        frequnit = 'Hz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
+        singlePSD_arr = [0, 1, 2],
+        left_spc=0.1,
+        top_spc=1-0.1,
+        right_spc=1-.05,
+        bottom_spc=.1,
+        xgrid_spc=.3,
+        ygrid_spc=.2,
+):
+    '''
+
+    :return:
+    '''
 
     dataX, dataY, pulseData = loadStream(filename)
-    dataXY = np.abs(dataX + 1j*dataY)
-    endofpulse = findendofpulse(dataX, dataY, pulseData, 0)
-    start = (int)(endofpulse[0] + pointsofacqdelay)
-    stop = (int)(start + pointsofacqtime)
-    print('#elements in EoP: '+str(len(endofpulse)))
-    plotEndIndex = 100000
-    plt.plot(pulseData[:plotEndIndex])
-    #plt.plot(dataX)
-    #plt.plot(dataY, alpha = 0.5)
-    plt.plot(dataXY[:plotEndIndex])
-    plt.plot(endofpulse[0], 1, "o")
-    plt.plot(start, 1, "o")
-    plt.plot(stop, 1, "o")
-    #plt.xlim(0,50000)
+    dataXY = np.abs(dataX + 1j * dataY)
+    startofpulse, endofpulse = findpulse(dataX, dataY, pulseData, 4)
+
+    if len(startofpulse) == 0:
+        raise ValueError('len(startofpulse) == 0')
+    if len(endofpulse) == 0:
+        raise ValueError('len(endofpulse) == 0')
+
+    if startofpulse[0] < endofpulse[0]:
+        startofpulse = startofpulse[1:]
+    if endofpulse[-1] > startofpulse[-1]:
+        endofpulse = endofpulse[:-1]
+    #print(startofpulse.shape)
+    #print(endofpulse.shape)
+    if len(startofpulse) == 0:
+        raise ValueError('len(startofpulse) == 0 after correction')
+    if len(endofpulse) == 0:
+        raise ValueError('len(endofpulse) == 0 after correction')
+    pointsofpulse = endofpulse[1]-endofpulse[0]
+    signaltime_arr = np.linspace(start=0, stop=len(pulseData) / samprate, num=len(pulseData), endpoint=False,
+                                 dtype=float)
+    numofpulse = len(endofpulse)
+    #pointsofpulselength = int(pulselength * samprate)
+    pointsofacqdelay = int(acqdelay * samprate)
+    pointsofacqtime = int(acqtime * samprate)
+    if (pointsofacqdelay+pointsofacqtime) > np.min(startofpulse-endofpulse):
+        raise ValueError('(pointsofacqdelay+pointsofacqtime) > min(endofpulse-startofpulse)')
+    startofacq = endofpulse + pointsofacqdelay
+    acq_arr = np.array([startofacq,startofacq+pointsofacqtime]).transpose()
+
+    plt.style.use('seaborn-colorblind')
+    # plt.rcParams['figure.figsize'] = [16, 9]
+    plt.rcParams['font.size'] = 14
+    # 'tab:blue' 'tab:orange''tab:green' 'tab:red''tab:purple''tab:brown''tab:pink''tab:gray''tab:olive''tab:cyan'
+
+    for i in singlePSD_arr:
+        singlefrequencies, singlePSD = stdLIAPSD(data_x=dataX[acq_arr[i, 0]:acq_arr[i, 1] + 1],
+                                                 data_y=dataY[acq_arr[i, 0]:acq_arr[i, 1] + 1],
+                                                 dataunit='V',  # 'muV', 'nV'
+                                                 samprate=samprate,  # in Hz
+                                                 dfreq=0,  # in Hz
+                                                 attenuation=6,  # in dB. Power ratio (10^(attenuation/10))
+                                                 window='rectangle'  # Hanning, Hamming, Blackman
+                                                 )
+
+        fig = plt.figure(figsize=(18, 9))  #
+        gs = gridspec.GridSpec(nrows=3, ncols=2)  #
+        fig.subplots_adjust(left=left_spc, top=top_spc, right=right_spc,
+                            bottom=bottom_spc, wspace=xgrid_spc, hspace=ygrid_spc)
+        displaytime = [max(0,acq_arr[i, 0]-pointsofpulse//2), min(acq_arr[i, 1]+pointsofpulse//2, len(signaltime_arr))]
+        print(displaytime)
+        pulse_ax = fig.add_subplot(gs[0, 0])
+        pulse_ax.plot(signaltime_arr[displaytime[0]:displaytime[1]], pulseData[displaytime[0]:displaytime[1]],
+                      label="pulse signal", c='tab:purple')
+        pulse_ax.set_ylabel('Voltage / V')
+        pulse_ax.set_xlim(signaltime_arr[displaytime[0]], signaltime_arr[displaytime[1]])
+
+        dataX_ax = fig.add_subplot(gs[1, 0])
+        dataX_ax.plot(signaltime_arr[displaytime[0]:displaytime[1]], dataX[displaytime[0]:displaytime[1]],
+                      label="LIA X data",
+                      c='tab:green')
+        dataX_ax.plot(signaltime_arr[acq_arr[i, 0]:acq_arr[i, 1]],dataX[acq_arr[i, 0]:acq_arr[i, 1]],
+                      label="LIA X data for PSD",
+                      c='tab:cyan', alpha=0.5)
+
+        dataX_ax.set_ylabel('Voltage / V')
+        dataX_ax.set_xlim(signaltime_arr[displaytime[0]], signaltime_arr[displaytime[1]])
+
+        dataY_ax = fig.add_subplot(gs[2, 0])
+        dataY_ax.plot(signaltime_arr[displaytime[0]:displaytime[1]], dataY[displaytime[0]:displaytime[1]], label="LIA Y data",
+                      c='tab:brown')
+        dataY_ax.plot(signaltime_arr[acq_arr[i, 0]:acq_arr[i, 1]], dataY[acq_arr[i, 0]:acq_arr[i, 1]],
+                      label="LIA Y data for PSD",
+                      c='tab:cyan', alpha=0.5)
+        dataY_ax.set_ylabel('Voltage / V')
+        dataY_ax.set_xlim(signaltime_arr[displaytime[0]], signaltime_arr[displaytime[1]])
+        dataY_ax.set_xlabel('time / s')
+
+        pulse_ax.legend(loc='upper right')
+        dataX_ax.legend(loc='upper right')
+        dataY_ax.legend(loc='upper right')
+
+        if frequnit == 'kHz':
+            singlefrequencies /= 1e3
+        elif frequnit == 'MHz':
+            singlefrequencies /= 1e6
+        elif frequnit == 'GHz':
+            singlefrequencies /= 1e9
+        elif frequnit == 'THz':
+            singlefrequencies /= 1e12
+        elif frequnit != 'Hz':
+            raise ValueError('frequnit wrong')
+
+        if PSDorASD == 'PSD':
+            PSD_ax = fig.add_subplot(gs[:, 1])
+            PSD_ax.plot(singlefrequencies, singlePSD, label="PSD", c='tab:blue')
+            PSD_ax.set_xlabel('frequency / ' + frequnit)
+            PSD_ax.set_ylabel('PSD / $V^2/Hz$')
+            PSD_ax.set_yscale("log")
+            PSD_ax.legend(loc='upper right')
+        elif PSDorASD == 'ASD':
+            ASD_ax = fig.add_subplot(gs[:, 1])
+            ASD_ax.plot(singlefrequencies, np.sqrt(singlePSD), label="ASD", c='tab:blue')
+            ASD_ax.set_xlabel('frequency / ' + frequnit)
+            ASD_ax.set_ylabel('ASD / $V/\sqrt{Hz}$')
+            ASD_ax.set_yscale("log")
+            ASD_ax.legend(loc='upper right')
+        else:
+            raise ValueError('PSDorASD set wrong')
+
+        # plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
+        fig.suptitle('Single shot\n' + filename)
+        plt.grid()
+        plt.show()
+        del singlefrequencies, singlePSD, fig, gs
+
+
+    PSD = np.zeros(pointsofacqtime)
+    #print(PSD.shape)
+    for i in range(numofpulse):
+        #print(singleshot)
+        frequencies, singlePSD = stdLIAPSD(data_x = dataX[acq_arr[i,0]:acq_arr[i,1]],
+        data_y = dataY[acq_arr[i,0]:acq_arr[i,1]],
+        dataunit = 'V',  # 'muV', 'nV'
+        samprate = samprate,  # in Hz
+        dfreq = 0,  # in Hz
+        attenuation = 6,  # in dB. Power ratio (10^(attenuation/10))
+        window = 'rectangle'  # Hanning, Hamming, Blackman
+        )
+        #print(singlePSD.shape)
+        PSD += singlePSD/numofpulse
+        del singlePSD
+
+
+    fig = plt.figure(figsize=(18, 9))  #
+    gs = gridspec.GridSpec(nrows=3, ncols=2)  #
+    fig.subplots_adjust(left=left_spc, top=top_spc, right=right_spc,
+                        bottom=bottom_spc, wspace=xgrid_spc, hspace=ygrid_spc)
+    if showtimedomain:
+        pulse_ax = fig.add_subplot(gs[0, 0])
+        pulse_ax.plot(signaltime_arr, pulseData, label="pulse signal", c='tab:purple')
+        pulse_ax.set_ylabel('Voltage / V')
+        pulse_ax.set_xlim(signaltime_arr[0],signaltime_arr[-1])
+
+        dataX_ax = fig.add_subplot(gs[1, 0])
+        dataX_ax.plot(signaltime_arr, dataX, label="LIA X", c='tab:green')
+        dataX_ax.set_ylabel('Voltage / V')
+        dataX_ax.set_xlim(signaltime_arr[0], signaltime_arr[-1])
+
+        dataY_ax = fig.add_subplot(gs[2, 0])
+        dataY_ax.plot(signaltime_arr, dataY, label="LIA Y", c='tab:brown')
+        dataY_ax.set_ylabel('Voltage / V')
+        dataY_ax.set_xlim(signaltime_arr[0], signaltime_arr[-1])
+
+        dataY_ax.set_xlabel('time / s')
+        pulse_ax.legend(loc='upper right')
+        dataX_ax.legend(loc='upper right')
+        dataY_ax.legend(loc='upper right')
+
+        if showacqdata:
+            acqsignaltime = []
+            acqdataX = []
+            acqdataY = []
+            for i in range(numofpulse):
+                acqsignaltime.append(signaltime_arr[acq_arr[i, 0]:acq_arr[i, 1] + 1])
+                acqdataX.append(dataX[acq_arr[i, 0]:acq_arr[i, 1] + 1])
+                acqdataY.append(dataY[acq_arr[i, 0]:acq_arr[i, 1] + 1])
+            dataX_ax.plot(acqsignaltime, acqdataX, label="LIA X data for PSD", c='tab:cyan', alpha=0.5)
+            dataY_ax.plot(acqsignaltime, acqdataY, label="LIA Y data for PSD", c='tab:cyan', alpha=0.5)
+        if frequnit=='kHz':
+            frequencies /= 1e3
+        elif frequnit=='MHz':
+            frequencies /= 1e6
+        elif frequnit=='GHz':
+            frequencies /= 1e9
+        elif frequnit=='THz':
+            frequencies /= 1e12
+        elif frequnit != 'Hz':
+            raise ValueError('frequnit wrong')
+
+    if showfreqdomain:
+        if PSDorASD == 'PSD':
+            PSD_ax = fig.add_subplot(gs[:, 1])
+            PSD_ax.plot(frequencies, PSD, label="PSD", c='tab:blue')
+            PSD_ax.set_xlabel('frequency / ' + frequnit)
+            PSD_ax.set_ylabel('PSD / $V^2/Hz$')
+            PSD_ax.set_yscale('log')
+            PSD_ax.legend(loc='upper right')
+        elif PSDorASD == 'ASD':
+            ASD_ax = fig.add_subplot(gs[:, 1])
+            ASD_ax.plot(frequencies, np.sqrt(PSD), label="ASD", c='tab:blue')
+            ASD_ax.set_xlabel('frequency / ' + frequnit)
+            ASD_ax.set_ylabel('ASD (Sqrt of averaged PSD) / $V/\sqrt{Hz}$')
+            ASD_ax.set_yscale('log')
+            ASD_ax.legend(loc='upper right')
+        else:
+            raise ValueError('PSDorASD set wrong')
+    #plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
+    fig.suptitle('All shots\n'+filename)
+    plt.grid()
     plt.show()
-    #plt.close()
-    
-    df = pd.DataFrame({"dataX" : dataX, "dataY" : dataY, "pulseData" : pulseData})
-    df.to_csv("FID.txt", index=False, header=False)
-    
-    PSD = np.zeros(int(pointsofacqtime))
-    #print("debug mark")
-    for i in endofpulse[:-1]: # if the last FID length goes beyond the data length, use -2 instead of -1
-        start = (int)(i + pointsofacqdelay)
-        #print(start)
-        stop = (int)(start + pointsofacqtime)
-        #print(stop)
-        #print(dataX[start: stop])
-        frequencies, PSD = FT(dataX[start: stop], dataY[start: stop])
-        PSD = PSD + PSD / len(endofpulse)
-        
-    #print(PSD)
-    # save spectra
-    df = pd.DataFrame({"frequencies" : frequencies, "spectra" : PSD})
-    df.to_csv(outputfile, index=False, header=False)
-    
-    # fit
-    # popt, pcov = curve_fit(Lorentzian, frequencies, spectra, p0=(frequencies[np.argmax(spectra)], 1, 100000, 0))
-    # plt.plot(frequencies, Lorentzian(frequencies, *popt), 'g--',)
 
-    print('file = '+filename)
-    print('acqtime = %.6fs' %acqtime)
-    print('samplefreq = %.1fHz' %samplefreq)
-    print('pulselength = %.6fs' %pulselength)
-    print('acqdelay = %.6fs' %acqdelay)
-    # print('fit: center=%5.3f, linewidth=%5.3f, area=%5.3f' % ( popt[0], popt[1], popt[2]))
-    
-    pos1 , t = min(enumerate(frequencies), key=lambda x: abs(-600 - x[1]))
-    pos2 , t = min(enumerate(frequencies), key=lambda x: abs(x[1]))
-    sum = 0
-    print(frequencies[2]-frequencies[1])
-    print(frequencies[pos1], frequencies[pos2])
-    #for i in range(pos1, pos2):
-    #    sum = sum + PSD[i] * (frequencies[2]-frequencies[1]) 
-    plt.plot(frequencies, np.sqrt(PSD))
-    plt.yscale("log")
-    plt.xlabel("Frequency (Hz)")
-    # plt.ylabel("Amplitude spectral density ($ \phi_0^2 / Hz$)")
-    plt.ylabel("Amplitude spectral density ($V^2/Hz$)")
-    plt.title(filename)
-    plt.savefig(filename[:11]+"spectrum.pdf")
-    plt.show()
-    plt.close()
-    return sum  # return area
+    del fig, gs
 
 
-# this is specifically for amplitude sweep
-# 300us no.46 is too noisy?
-# dict = {34: '25us', 38: '100us', 39: '125us', 40: '150us', 41: '175us', 3: '300us', 48: '350us', 49: '375us', 50: '400us', 51: '425us', 52: '450us', 54: '500us'}
-
-# area, t, err = [], [], []
-
-# error = plot(999)
-# for i in dict.keys():
-#     area.append(plot(i,dict[i]))
-#     t.append(float(dict[i][:-2]))
-#     err.append(error)
-# plt.errorbar(t, area, yerr = err, fmt='o')
-# plt.plot(t, area)
-# plt.title('pulse duration sweep')
-# plt.ylabel('area from -600Hz to 0Hz($\phi_0^2$)')
-# plt.xlabel('pulse duration(us)')    
-# plt.savefig('durationsweep.pdf')
-# plt.legend()
-# plt.savefig('durationsweepstacked.pdf')
-# for i in range(3, 9):
-#     plot(i)
-
-
-plot(1)
+pulseNMRplot(
+        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_002/stream_00000.h5",
+        dfreq = 30e3,  # in Hz
+        samprate = 26.79e3,  # in Hz
+        pulselength = 1,
+        acqdelay = 0.1,
+        acqtime = 1,
+        showtimedomain = True,
+        showacqdata = True,
+        showfreqdomain = True,
+        PSDorASD = 'ASD',
+        frequnit = 'Hz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
+        singlePSD_arr = [0, 1, 2]
+)
