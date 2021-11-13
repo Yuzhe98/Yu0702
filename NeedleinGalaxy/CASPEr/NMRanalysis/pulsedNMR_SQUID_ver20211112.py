@@ -71,6 +71,7 @@ def Lorentzian(x, center, gamma, A, offset):
 def LIAFilterPSD(frequency, Tn, order):
     return np.abs(1/(1 + 2*np.pi*1j*frequency*Tn)**order)**2
 
+
 def stdLIAPSD(
         data_x,
         data_y,
@@ -128,7 +129,7 @@ def pulseNMRplot(
         frequnit = 'kHz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
         ampunit = 'muPhi',
         singlePSD_arr = [0],
-        stddev_range = [35,37],
+        stddev_range = [35e3,37e3],
         left_spc=0.1,
         top_spc=1-0.1,
         right_spc=1-.05,
@@ -157,6 +158,8 @@ def pulseNMRplot(
         unit of the amplitude of the spectrum. It can be 'V', 'muV', 'Phi', or 'muPhi'. The default unit is 'muPhi'
 
     singlePSD_arr = [0, 1, 2],
+    stddev_range:
+        Compute the standard deviation within the given frequency range. The unit of it is Hz.
     left_spc=0.1,
     top_spc=1-0.1,
     right_spc=1-.05,
@@ -203,7 +206,7 @@ def pulseNMRplot(
     # 'tab:blue' 'tab:orange''tab:green' 'tab:red''tab:purple''tab:brown''tab:pink''tab:gray''tab:olive''tab:cyan'
 
     for i in singlePSD_arr:
-        singlefrequencies, singlePSD = stdLIAPSD(data_x=dataX[acq_arr[i, 0]:acq_arr[i, 1] + 1],
+        frequencies, PSD = stdLIAPSD(data_x=dataX[acq_arr[i, 0]:acq_arr[i, 1] + 1],
                                                  data_y=dataY[acq_arr[i, 0]:acq_arr[i, 1] + 1],
                                                  dataunit='V',  # 'muV', 'nV'
                                                  samprate=samprate,  # in Hz
@@ -216,7 +219,7 @@ def pulseNMRplot(
         gs = gridspec.GridSpec(nrows=3, ncols=2)  #
         fig.subplots_adjust(left=left_spc, top=top_spc, right=right_spc,
                             bottom=bottom_spc, wspace=xgrid_spc, hspace=ygrid_spc)
-        displaytime = [max(0,acq_arr[i, 0]-pointsofpulse//2), min(acq_arr[i, 1]+pointsofpulse//2, len(signaltime_arr))]
+        displaytime = [max(0,acq_arr[i, 0]-pointsofpulse), min(acq_arr[i, 1]+pointsofpulse, len(signaltime_arr))]
         print(displaytime)
         pulse_ax = fig.add_subplot(gs[0, 0])
         pulse_ax.plot(signaltime_arr[displaytime[0]:displaytime[1]], pulseData[displaytime[0]:displaytime[1]],
@@ -249,16 +252,25 @@ def pulseNMRplot(
         dataX_ax.legend(loc='upper right')
         dataY_ax.legend(loc='upper right')
 
-        singlefrequencies+=dfreq
+        frequencies+=dfreq
+        # Compute the standard deviation
+        stdstart = np.argmin(abs(frequencies-stddev_range[0]))
+        stdend = np.argmin(abs(frequencies - stddev_range[1]))
+        if abs(stdstart-stdend)<=10:
+            print("abs(stdstart-stdend)<=10\ntoo less data for computing standard deviation")
+        stddev = np.std(PSD[stdstart:stdend])
+
         if frequnit == 'kHz':
-            singlefrequencies /= 1e3
+            freqfactor = 1e-3
         elif frequnit == 'MHz':
-            singlefrequencies /= 1e6
+            sfreqfactor = 1e-6
         elif frequnit == 'GHz':
-            singlefrequencies /= 1e9
+            freqfactor = 1e-9
         elif frequnit == 'THz':
-            singlefrequencies /= 1e12
+            freqfactor = 1e-12
         elif frequnit != 'Hz':
+            freqfactor = 1
+        else:
             raise ValueError('frequnit wrong')
 
         if ampunit == 'muV' or ampunit == 'microV' or ampunit == 'uV' or ampunit == 'muv' or ampunit == 'microv' or ampunit == 'uv':
@@ -278,21 +290,29 @@ def pulseNMRplot(
 
         if spectype == 'PSD':
             PSD_ax = fig.add_subplot(gs[:, 1])
-            PSD_ax.plot(singlefrequencies, singlePSD, label="Power Spectrum Density", c='tab:blue')
+            PSD_ax.plot(freqfactor*frequencies, PSD, label="Power Spectrum Density", c='tab:blue')
+            PSD_ax.plot(freqfactor * frequencies[stdstart:stdend], PSD[stdstart:stdend],
+                        label='Standard deviation = %3f'%(stddev)+'$V^{2}/Hz$'+'\n(Computed based on PSD data)', c='tab:red')
             PSD_ax.set_xlabel('absolute frequency / ' + frequnit)
             PSD_ax.set_ylabel('PSD / $V^{2}/Hz$')
             PSD_ax.set_yscale("log")
             PSD_ax.legend(loc='upper right')
         elif spectype == 'ASD':
             ASD_ax = fig.add_subplot(gs[:, 1])
-            ASD_ax.plot(singlefrequencies, ampfactor*np.sqrt(singlePSD), label="Amplitude Spectrum Density", c='tab:blue')
+            ASD_ax.plot(freqfactor*frequencies, ampfactor*np.sqrt(PSD), label="Amplitude Spectrum Density", c='tab:blue')
+            ASD_ax.plot(freqfactor * frequencies[stdstart:stdend], ampfactor*np.sqrt(PSD[stdstart:stdend]),
+                  label='Standard deviation = %3f '% (ampfactor*np.sqrt(stddev))+ densityunit +'\n(Computed based on PSD data)' , c='tab:red')
             ASD_ax.set_xlabel('absolute frequency / ' + frequnit)
             ASD_ax.set_ylabel('ASD / ' + densityunit)
             ASD_ax.set_yscale("log")
             ASD_ax.legend(loc='upper right')
         elif spectype == 'Flux':
             FSD_ax = fig.add_subplot(gs[:, 1])
-            FSD_ax.plot(singlefrequencies, ampfactor*Mf/Rf*np.sqrt(singlePSD), label="Flux Spectrum Density", c='tab:blue')
+            FSD_ax.plot(freqfactor*frequencies, ampfactor*Mf/Rf*np.sqrt(PSD), label="Flux Spectrum Density", c='tab:blue')
+            FSD_ax.plot(freqfactor * frequencies[stdstart:stdend],
+                        ampfactor*Mf/Rf* np.sqrt(PSD[stdstart:stdend]),
+                        label='Standard deviation = %3f ' % (ampfactor*Mf/Rf*np.sqrt(stddev))+densityunit + '\n(Computed based on PSD data)',
+                        c='tab:red')
             FSD_ax.set_xlabel('absolute frequency / ' + frequnit)
             FSD_ax.set_ylabel('FSD / ' + densityunit)
             FSD_ax.set_yscale("log")
@@ -302,10 +322,10 @@ def pulseNMRplot(
 
         # plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
         fig.suptitle('Single shot\n' + filename)
-        plt.tight_layout()
+        #plt.tight_layout()
         plt.grid()
         plt.show()
-        del singlefrequencies, singlePSD, fig, gs
+        del frequencies, PSD, fig, gs, stdstart, stdend, stddev
 
 
     PSD = np.zeros(pointsofacqtime)
@@ -362,15 +382,23 @@ def pulseNMRplot(
             dataY_ax.plot(acqsignaltime, acqdataY, label="LIA Y data for PSD", c='tab:cyan', alpha=0.5)
 
         frequencies+=dfreq
-        if frequnit=='kHz':
-            frequencies /= 1e3
-        elif frequnit=='MHz':
-            frequencies /= 1e6
-        elif frequnit=='GHz':
-            frequencies /= 1e9
-        elif frequnit=='THz':
-            frequencies /= 1e12
+        stdstart = np.argmin(abs(frequencies - stddev_range[0]))
+        stdend = np.argmin(abs(frequencies - stddev_range[1]))
+        if abs(stdstart - stdend) <= 10:
+            print("abs(stdstart-stdend)<=10\ntoo less data for computing standard deviation")
+        stddev = np.std(PSD[stdstart:stdend])
+
+        if frequnit == 'kHz':
+            freqfactor = 1e-3
+        elif frequnit == 'MHz':
+            freqfactor = 1e-6
+        elif frequnit == 'GHz':
+            freqfactor = 1e-9
+        elif frequnit == 'THz':
+            freqfactor = 1e-12
         elif frequnit != 'Hz':
+            freqfactor = 1
+        else:
             raise ValueError('frequnit wrong')
 
         if ampunit == 'muV' or ampunit == 'microV' or ampunit == 'uV' or ampunit == 'muv' or ampunit == 'microv' or ampunit == 'uv':
@@ -391,21 +419,35 @@ def pulseNMRplot(
     if showfreqdomain:
         if spectype == 'PSD':
             PSD_ax = fig.add_subplot(gs[:, 1])
-            PSD_ax.plot(frequencies, PSD, label="Power Spectrum Density", c='tab:blue')
+            PSD_ax.plot(freqfactor * frequencies, PSD, label="Power Spectrum Density", c='tab:blue')
+            PSD_ax.plot(freqfactor * frequencies[stdstart:stdend], PSD[stdstart:stdend],
+                        label='Standard deviation = %3f' % (stddev) + '$V^{2}/Hz$' + '\n(Computed based on PSD data)',
+                        c='tab:red')
             PSD_ax.set_xlabel('absolute frequency / ' + frequnit)
-            PSD_ax.set_ylabel('PSD / $V^2/Hz$')
+            PSD_ax.set_ylabel('PSD / $V^{2}/Hz$')
             PSD_ax.set_yscale("log")
             PSD_ax.legend(loc='upper right')
         elif spectype == 'ASD':
             ASD_ax = fig.add_subplot(gs[:, 1])
-            ASD_ax.plot(frequencies, ampfactor*np.sqrt(PSD), label="Amplitude Spectrum Density", c='tab:blue')
+            ASD_ax.plot(freqfactor * frequencies, ampfactor * np.sqrt(PSD), label="Amplitude Spectrum Density",
+                        c='tab:blue')
+            ASD_ax.plot(freqfactor * frequencies[stdstart:stdend], ampfactor * np.sqrt(PSD[stdstart:stdend]),
+                        label='Standard deviation = %3f ' % (
+                                    ampfactor * np.sqrt(stddev)) + densityunit + '\n(Computed based on PSD data)',
+                        c='tab:red')
             ASD_ax.set_xlabel('absolute frequency / ' + frequnit)
             ASD_ax.set_ylabel('ASD / ' + densityunit)
             ASD_ax.set_yscale("log")
             ASD_ax.legend(loc='upper right')
         elif spectype == 'Flux':
             FSD_ax = fig.add_subplot(gs[:, 1])
-            FSD_ax.plot(frequencies, ampfactor*Mf/Rf*np.sqrt(PSD), label="Flux Spectrum Density", c='tab:blue')
+            FSD_ax.plot(freqfactor * frequencies, ampfactor * Mf / Rf * np.sqrt(PSD), label="Flux Spectrum Density",
+                        c='tab:blue')
+            FSD_ax.plot(freqfactor * frequencies[stdstart:stdend],
+                        ampfactor * Mf / Rf * np.sqrt(PSD[stdstart:stdend]),
+                        label='Standard deviation = %3f ' % (ampfactor * Mf / Rf * np.sqrt(
+                            stddev)) + densityunit + '\n(Computed based on PSD data)',
+                        c='tab:red')
             FSD_ax.set_xlabel('absolute frequency / ' + frequnit)
             FSD_ax.set_ylabel('FSD / ' + densityunit)
             FSD_ax.set_yscale("log")
@@ -421,7 +463,7 @@ def pulseNMRplot(
 
 
 pulseNMRplot(
-        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_002/stream_00000.h5",
+        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_000/stream_00000.h5",
         dfreq = 30e3,  # in Hz
         samprate = 26.79e3,  # in Hz
         pulselength = 1,
@@ -435,5 +477,5 @@ pulseNMRplot(
         Rf=10e3,  # in Ohm
         frequnit='kHz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
         ampunit='Phi',  # 'V', 'muV', 'muPhi'
-        singlePSD_arr=[0],
+        singlePSD_arr=[1,2,3],
 )
