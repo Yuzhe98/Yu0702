@@ -122,9 +122,13 @@ def pulseNMRplot(
         showtimedomain = True,
         showacqdata = True,
         showfreqdomain = True,
-        PSDorASD = 'ASD',
-        frequnit = 'Hz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
-        singlePSD_arr = [0, 1, 2],
+        spectype ='Flux',
+        Mf=31706,  # feedback sensitivity which can be found in the SQUID specifications. For the SQUID we usually use, M_f = 31 706 \phi_0 / A
+        Rf=10e3,  # in Ohm
+        frequnit = 'kHz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
+        ampunit = 'muPhi',
+        singlePSD_arr = [0],
+        stddev_range = [35,37],
         left_spc=0.1,
         top_spc=1-0.1,
         right_spc=1-.05,
@@ -133,7 +137,32 @@ def pulseNMRplot(
         ygrid_spc=.2,
 ):
     '''
+    filename,
+    dfreq = 0,  # in Hz
+        samprate = 13e3,  # in Hz
+        pulselength = 3.0,
+        acqdelay = 0.1,
+        acqtime = 1,
+        showtimedomain = True,
+        showacqdata = True,
+        showfreqdomain = True,
+    spectype:
+        'PSD', 'ASD', 'Flux'
+    Mf:
+        feedback sensitivity which can be found in the SQUID specifications. For the SQUID we usually use, M_f = 31 706 \phi_0 / A
+    Rf=10e3,  # in Ohm
+    frequnit = 'kHz':
+        The unit of frequency. 'Hz', 'kHz', 'MHz', 'GHz' and 'THz' are available.
+    ampunit:
+        unit of the amplitude of the spectrum. It can be 'V', 'muV', 'Phi', or 'muPhi'. The default unit is 'muPhi'
 
+    singlePSD_arr = [0, 1, 2],
+    left_spc=0.1,
+    top_spc=1-0.1,
+    right_spc=1-.05,
+    bottom_spc=.1,
+    xgrid_spc=.3,
+    ygrid_spc=.2,
     :return:
     '''
 
@@ -220,6 +249,7 @@ def pulseNMRplot(
         dataX_ax.legend(loc='upper right')
         dataY_ax.legend(loc='upper right')
 
+        singlefrequencies+=dfreq
         if frequnit == 'kHz':
             singlefrequencies /= 1e3
         elif frequnit == 'MHz':
@@ -231,25 +261,48 @@ def pulseNMRplot(
         elif frequnit != 'Hz':
             raise ValueError('frequnit wrong')
 
-        if PSDorASD == 'PSD':
+        if ampunit == 'muV' or ampunit == 'microV' or ampunit == 'uV' or ampunit == 'muv' or ampunit == 'microv' or ampunit == 'uv':
+            ampfactor = 1e6
+            densityunit = '$\mu V/\sqrt{Hz}$'
+        elif ampunit == 'muPhi' or ampunit == 'microPhi' or ampunit == 'uPhi' or ampunit == 'muphi' or ampunit == 'microphi' or ampunit == 'uphi':
+            ampfactor = 1e6
+            densityunit = '$\mu \Phi_{0}/\sqrt{Hz}$'
+        elif ampunit == 'V' or ampunit == 'v':
+            ampfactor = 1
+            densityunit = '$V/\sqrt{Hz}$'
+        elif ampunit == 'Phi' or ampunit == 'phi':
+            ampfactor = 1
+            densityunit = '$\Phi_{0}/\sqrt{Hz}$'
+        else:
+            raise ValueError('ampunit wrong')
+
+        if spectype == 'PSD':
             PSD_ax = fig.add_subplot(gs[:, 1])
-            PSD_ax.plot(singlefrequencies, singlePSD, label="PSD", c='tab:blue')
-            PSD_ax.set_xlabel('frequency / ' + frequnit)
-            PSD_ax.set_ylabel('PSD / $V^2/Hz$')
+            PSD_ax.plot(singlefrequencies, singlePSD, label="Power Spectrum Density", c='tab:blue')
+            PSD_ax.set_xlabel('absolute frequency / ' + frequnit)
+            PSD_ax.set_ylabel('PSD / $V^{2}/Hz$')
             PSD_ax.set_yscale("log")
             PSD_ax.legend(loc='upper right')
-        elif PSDorASD == 'ASD':
+        elif spectype == 'ASD':
             ASD_ax = fig.add_subplot(gs[:, 1])
-            ASD_ax.plot(singlefrequencies, np.sqrt(singlePSD), label="ASD", c='tab:blue')
-            ASD_ax.set_xlabel('frequency / ' + frequnit)
-            ASD_ax.set_ylabel('ASD / $V/\sqrt{Hz}$')
+            ASD_ax.plot(singlefrequencies, ampfactor*np.sqrt(singlePSD), label="Amplitude Spectrum Density", c='tab:blue')
+            ASD_ax.set_xlabel('absolute frequency / ' + frequnit)
+            ASD_ax.set_ylabel('ASD / ' + densityunit)
             ASD_ax.set_yscale("log")
             ASD_ax.legend(loc='upper right')
+        elif spectype == 'Flux':
+            FSD_ax = fig.add_subplot(gs[:, 1])
+            FSD_ax.plot(singlefrequencies, ampfactor*Mf/Rf*np.sqrt(singlePSD), label="Flux Spectrum Density", c='tab:blue')
+            FSD_ax.set_xlabel('absolute frequency / ' + frequnit)
+            FSD_ax.set_ylabel('FSD / ' + densityunit)
+            FSD_ax.set_yscale("log")
+            FSD_ax.legend(loc='upper right')
         else:
-            raise ValueError('PSDorASD set wrong')
+            raise ValueError('spectype set wrong')
 
         # plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
         fig.suptitle('Single shot\n' + filename)
+        plt.tight_layout()
         plt.grid()
         plt.show()
         del singlefrequencies, singlePSD, fig, gs
@@ -307,6 +360,8 @@ def pulseNMRplot(
                 acqdataY.append(dataY[acq_arr[i, 0]:acq_arr[i, 1] + 1])
             dataX_ax.plot(acqsignaltime, acqdataX, label="LIA X data for PSD", c='tab:cyan', alpha=0.5)
             dataY_ax.plot(acqsignaltime, acqdataY, label="LIA Y data for PSD", c='tab:cyan', alpha=0.5)
+
+        frequencies+=dfreq
         if frequnit=='kHz':
             frequencies /= 1e3
         elif frequnit=='MHz':
@@ -318,23 +373,45 @@ def pulseNMRplot(
         elif frequnit != 'Hz':
             raise ValueError('frequnit wrong')
 
-    if showfreqdomain:
-        if PSDorASD == 'PSD':
-            PSD_ax = fig.add_subplot(gs[:, 1])
-            PSD_ax.plot(frequencies, PSD, label="PSD", c='tab:blue')
-            PSD_ax.set_xlabel('frequency / ' + frequnit)
-            PSD_ax.set_ylabel('PSD / $V^2/Hz$')
-            PSD_ax.set_yscale('log')
-            PSD_ax.legend(loc='upper right')
-        elif PSDorASD == 'ASD':
-            ASD_ax = fig.add_subplot(gs[:, 1])
-            ASD_ax.plot(frequencies, np.sqrt(PSD), label="ASD", c='tab:blue')
-            ASD_ax.set_xlabel('frequency / ' + frequnit)
-            ASD_ax.set_ylabel('ASD (Sqrt of averaged PSD) / $V/\sqrt{Hz}$')
-            ASD_ax.set_yscale('log')
-            ASD_ax.legend(loc='upper right')
+        if ampunit == 'muV' or ampunit == 'microV' or ampunit == 'uV' or ampunit == 'muv' or ampunit == 'microv' or ampunit == 'uv':
+            ampfactor = 1e6
+            densityunit = '$\mu V/\sqrt{Hz}$'
+        elif ampunit == 'muPhi' or ampunit == 'microPhi' or ampunit == 'uPhi' or ampunit == 'muphi' or ampunit == 'microphi' or ampunit == 'uphi':
+            ampfactor = 1e6
+            densityunit = '$\mu \Phi_{0}/\sqrt{Hz}$'
+        elif ampunit == 'V' or ampunit == 'v':
+            ampfactor = 1
+            densityunit = '$V/\sqrt{Hz}$'
+        elif ampunit == 'Phi' or ampunit == 'phi':
+            ampfactor = 1
+            densityunit = '$\Phi_{0}/\sqrt{Hz}$'
         else:
-            raise ValueError('PSDorASD set wrong')
+            raise ValueError('ampunit wrong')
+
+    if showfreqdomain:
+        if spectype == 'PSD':
+            PSD_ax = fig.add_subplot(gs[:, 1])
+            PSD_ax.plot(frequencies, PSD, label="Power Spectrum Density", c='tab:blue')
+            PSD_ax.set_xlabel('absolute frequency / ' + frequnit)
+            PSD_ax.set_ylabel('PSD / $V^2/Hz$')
+            PSD_ax.set_yscale("log")
+            PSD_ax.legend(loc='upper right')
+        elif spectype == 'ASD':
+            ASD_ax = fig.add_subplot(gs[:, 1])
+            ASD_ax.plot(frequencies, ampfactor*np.sqrt(PSD), label="Amplitude Spectrum Density", c='tab:blue')
+            ASD_ax.set_xlabel('absolute frequency / ' + frequnit)
+            ASD_ax.set_ylabel('ASD / ' + densityunit)
+            ASD_ax.set_yscale("log")
+            ASD_ax.legend(loc='upper right')
+        elif spectype == 'Flux':
+            FSD_ax = fig.add_subplot(gs[:, 1])
+            FSD_ax.plot(frequencies, ampfactor*Mf/Rf*np.sqrt(PSD), label="Flux Spectrum Density", c='tab:blue')
+            FSD_ax.set_xlabel('absolute frequency / ' + frequnit)
+            FSD_ax.set_ylabel('FSD / ' + densityunit)
+            FSD_ax.set_yscale("log")
+            FSD_ax.legend(loc='upper right')
+        else:
+            raise ValueError('spectype set wrong')
     #plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
     fig.suptitle('All shots\n'+filename)
     plt.grid()
@@ -353,7 +430,10 @@ pulseNMRplot(
         showtimedomain = True,
         showacqdata = True,
         showfreqdomain = True,
-        PSDorASD = 'ASD',
-        frequnit = 'Hz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
-        singlePSD_arr = [0, 1, 2]
+        spectype='Flux',
+        Mf=31706,  # feedback sensitivity
+        Rf=10e3,  # in Ohm
+        frequnit='kHz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
+        ampunit='Phi',  # 'V', 'muV', 'muPhi'
+        singlePSD_arr=[0],
 )
