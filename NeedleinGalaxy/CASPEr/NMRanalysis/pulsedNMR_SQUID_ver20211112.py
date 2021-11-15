@@ -463,9 +463,9 @@ def pulseNMRplot(
 
 
 pulseNMRplot(
-        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_000/stream_00000.h5",
-        dfreq = 30e3,  # in Hz
-        samprate = 26.79e3,  # in Hz
+        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_000-17/stream_00000.h5",
+        dfreq = 15e3,  # in Hz
+        samprate = 13.39e3,  # in Hz
         pulselength = 1,
         acqdelay = 0.1,
         acqtime = 1,
@@ -476,6 +476,7 @@ pulseNMRplot(
         Mf=31706,  # feedback sensitivity
         Rf=10e3,  # in Ohm
         frequnit='kHz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
-        ampunit='Phi',  # 'V', 'muV', 'muPhi'
-        singlePSD_arr=[1,2,3],
+        ampunit='muPhi',  # 'V', 'muV', 'muPhi'
+        singlePSD_arr=[0],
+        stddev_range=[14e3, 16e3],
 )
