@@ -27,7 +27,7 @@ def loadStream(filename):
     return dataX, dataY, pulseData#, frequency, filter_Tc, filter_order
 
 
-def findpulse(dataX = [], dataY = [], pulseData = [], trigger = 0):
+def findpulse(dataX = [], dataY = [], pulseData = [], trigger = 0, pulselen=0, samprate=1e3):
     """
     Args:
         dataX (np.list, optional): . Defaults to [].
@@ -61,7 +61,8 @@ def findpulse(dataX = [], dataY = [], pulseData = [], trigger = 0):
     elif trigger == 4:
         trigger_val = np.amax(pulseData)/2.
         startofpulse = np.flatnonzero((pulseData[1:] > trigger_val) & (pulseData[:-1] < trigger_val))
-        endofpulse = np.flatnonzero((pulseData[1:] < trigger_val) & (pulseData[:-1] > trigger_val))
+        endofpulse = startofpulse+int(pulselen*samprate)
+        #endofpulse = np.flatnonzero((pulseData[1:] < trigger_val) & (pulseData[:-1] > trigger_val))
     else:
         raise ValueError('trigger value out of range')
     return startofpulse, endofpulse
@@ -143,7 +144,7 @@ def pulsedNMRsignalamp(
         Bfield = 13e-4,  # in T
         SQUID_num='C6L1W',  # 'C73L1'
         L=953e-9,  # in H
-        R=14e-3,
+        #R=14e-3,
         h=4.135667696*10**(-15),  #
         gyroratio = 42.577478518*10**6,  # in Hz/T
         k=8.617333262145*10**(-5),
@@ -156,7 +157,7 @@ def pulsedNMRsignalamp(
     if verbose:
         print('kappa = %.6g'%kappa)
     n=sampvol*sampdens*NA
-    Phigrad = 2.25265*np.sqrt(3)/(2*np.pi)*mu0*mup*kappa*n/R
+    Phigrad = (44.1584)*mu0*mup*kappa*n
     if verbose:
         print('Phigrad = %.6g' % Phigrad)
     Phi=0
@@ -228,7 +229,7 @@ def SNRissuev2(
         signal_T2=None,
         signal_T2star=None,
         noise_std=709,  # in muPhi0^2/Hz
-        measureT=[0.01,1],
+        measureT=[0.02,0.5],
         samprate=1e6,
         SNRtarget=1,
 ):
@@ -245,17 +246,17 @@ def SNRissuev2(
     print(np.sum(PSD)/2)
     '''
     N_arr = np.zeros(100)
-    T2s = 1 / 6.28
+    T2s = 0.09
     measureT_arr = np.linspace(start=measureT[0], stop=measureT[1], num=int(100), dtype=float)
     for i in range(len(measureT_arr)):
-        time_arr = np.linspace(start=0, stop=measureT_arr[i], num=int(samprate*measureT_arr[i]), dtype=float)
+        time_arr = np.linspace(start=0.01, stop=measureT_arr[i], num=int(samprate*measureT_arr[i]), dtype=float)
         testsignal = signal_amp * np.exp(-time_arr / T2s) * np.sin(2 * np.pi * signal_freq * time_arr)
         Integ = np.sum(testsignal ** 2) / samprate / measureT_arr[i]
         Integ*=T2s
         print(Integ)
         N_arr[i] = (noise_std/Integ)**2
     print(N_arr)
-    plt.scatter(measureT_arr, (1+measureT_arr)*N_arr/3600)
+    plt.scatter(measureT_arr, (.1+measureT_arr)*N_arr/3600)
     plt.xlabel("acq time / s")
     plt.ylabel("necessary measure time / hour")
     plt.show()
@@ -267,7 +268,7 @@ def pulseNMRplot(
         DTRCfilter='off',
         dfreq = 0,  # in Hz
         samprate = 13e3,  # in Hz
-        pulselength = 3.0,
+        pulselength = 1.0,
         acqdelay = 0.1,
         acqtime = 1,
         showtimedomain = True,
@@ -326,7 +327,7 @@ def pulseNMRplot(
     if verbose:
         print('Time constant: ')
     dataXY = np.abs(dataX + 1j * dataY)
-    startofpulse, endofpulse = findpulse(dataX, dataY, pulseData, 4)
+    startofpulse, endofpulse = findpulse(dataX, dataY, pulseData, 4, pulselen=pulselength,samprate=samprate)
 
     if len(startofpulse) == 0:
         raise ValueError('len(startofpulse) == 0')
@@ -738,7 +739,7 @@ def pulseNMRplot(
     plt.show()
     del fig, gs
 
-sw=1
+sw=3
 if sw==0:
     pulseNMRplot(
         filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_000/stream_00000.h5",
@@ -771,7 +772,7 @@ if sw==1:
         dfreq=15e3,  # in Hz
         samprate=13.39e3,  # in Hz
         pulselength=1,
-        acqdelay=0.001,
+        acqdelay=0.1,
         acqtime=.2,
         showtimedomain=True,
         showacqdata=True,
@@ -790,60 +791,30 @@ if sw==2:
     SNRissue()
 if sw==3:
     SNRissuev2()
-'''
-# Methanol density under 0.1 MPa / mol/L
-# 20 C 24.687
-# 0 C 25.271
-# -20 C 25.860
-# -90 C 28.00
-methanoldensities = np.array([[20,24.687],[0,25.271],[-20,25.680],[-90,28]])
-field = 5e-4
-phi=np.zeros((4,2))
-for i in range(len(methanoldensities)):
-    phi[i,0] = pulsedNMRsignalamp(
-        mu0=1.25663706212e-6,  # in {\henry.\metre^{-1}
-        mup=1.41060679736e-26,
-        temp=methanoldensities[i,0],
-        tempunit='C',
-        sampvol=1.4e-3,  # in 'L'
-        sampdens=methanoldensities[i,1],  # in mol/L
-        NA=6.023e23,
-        Bfield=field,  # in T
-        SQUID_num='C6L1W',  # 'C73L1'
-        L=953e-9,  # in H
-        R=14e-3,
-        h=4.135667696 * 10 ** (-15),  #
-        gyroratio=42.577478518 * 10 ** 6,  # in Hz/T
-        k=8.617333262145 * 10 ** (-5),
-        verbose=True,
-    )
-    print('temperature = %.6g C'%methanoldensities[i,0])
-    print('sampdens = %.6g C' % methanoldensities[i, 1])
-    print('C6L1W phi value = %.4g\n\n\n'%(1e6*phi[i,0]))
-
-    phi[i,1] = pulsedNMRsignalamp(
-        mu0=1.25663706212e-6,  # in {\henry.\metre^{-1}
-        mup=1.41060679736e-26,
-        temp=methanoldensities[i, 0],
-        tempunit='C',
-        sampvol=1.4e-3,  # in 'L'
-        sampdens=methanoldensities[i, 1],  # in mol/L
-        NA=6.023e23,
-        Bfield=field,  # in T
-        SQUID_num='C73L1',  # 'C6L1W'
-        L=953e-9,  # in H
-        R=14e-3,
-        h=4.135667696 * 10 ** (-15),  #
-        gyroratio=42.577478518 * 10 ** 6,  # in Hz/T
-        k=8.617333262145 * 10 ** (-5),
-        verbose=True,
-    )
-    print('temperature = %.6g C' % methanoldensities[i, 0])
-    print('sampdens = %.6g C' % methanoldensities[i, 1])
-    print('C73L1 phi value = %.4g\n\n\n' %(1e6*phi[i,1]))
-print(1e6*phi.transpose())
-print(round(1e6*phi.transpose()[:],2))
 
 
 
-'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
