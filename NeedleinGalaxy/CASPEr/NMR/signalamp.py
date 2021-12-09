@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fftpack import fft, ifft
 import matplotlib.gridspec as gridspec
-import pulsedNMR_SQUID_ver20211112 as ps
+import NMRanalysis as ps
 # Methanol density under 0.1 MPa / mol/L
 # 20 C 24.687
 # 0 C 25.271

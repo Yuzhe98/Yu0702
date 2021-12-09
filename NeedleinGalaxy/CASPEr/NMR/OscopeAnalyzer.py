@@ -121,18 +121,19 @@ for i in range(len(filename_arr)):
     spec_ax = fig.add_subplot(gs[0, 1])
     spec_ax.locator_params(nbins=6, axis='x')
 
-    fstart = np.argmin(abs(frequencies - 1))
+    fstart = 0#np.argmin(abs(frequencies - 1))
     #spec_ax.plot(spectrum, label='')
     spec_ax.plot(freqscale*frequencies[fstart:],spectrum[fstart:],c='tab:green')
     spec_ax.plot(freqscale * frequencies[fstart+15000:], spectrum[fstart+15000:],
-                 label='standard deviation = %.2g$\\times 10^{-4}V^2/Hz$' % (1e4*np.std(spectrum[fstart+15000:])),c='tab:orange',alpha=1)
+                 label='standard deviation = %.2g$\\times 10^{-4}V^2/Hz$' % (1e4*np.std(spectrum[np.argmin(abs(frequencies - 1))+15000:])),c='tab:orange',alpha=1)
     spec_ax.set_xlabel('absolute frequency / kHz')
     spec_ax.set_ylabel('Amplitude / $V^2/Hz$')
     #spec_ax.set_title('standard deviation = %.2g$\\times 10^{-4}V^2/Hz$' % (1e4*np.std(spectrum[fstart:])))
     spec_ax.legend(loc='upper right')  #
     #spec_ax.set_xlim(0.1, )
-    spec_ax.set_ylim(-0.001, 0.03)
-    #spec_ax.set_yscale("log")
+    spec_ax.set_ylim(1e-8, 0.03)
+    spec_ax.set_yscale("log")
+    spec_ax.set_xscale('log')
     #fig.suptitle(filepath + filename_arr[i] + '.csv')
     fig.suptitle('sampling rate %g MHz'%(1e-6/abs(time_arr[0]-time_arr[1])))
     plt.grid()

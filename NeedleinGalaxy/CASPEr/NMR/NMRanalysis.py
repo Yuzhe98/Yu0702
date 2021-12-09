@@ -21,10 +21,10 @@ def loadStream(filename):
         dataX = dataFile['000/dev4434/demods/0/sample/x'][:]
         dataY = dataFile['000/dev4434/demods/0/sample/y'][:]
         pulseData = dataFile["000/dev4434/demods/0/sample/auxin0"][:]
-        #frequency = dataFile["000/dev4434/demods/0/sample/frequency"][0]
-        #filter_Tc = dataFile["000/dev4434/demods/0/timeconstant/value"][0]
-        #filter_order = dataFile["000/dev4434/demods/0/order/value"][0]
-    return dataX, dataY, pulseData#, frequency, filter_Tc, filter_order
+        dfreq = dataFile["000/dev4434/demods/0/freq/value"][0]
+        filter_TC = dataFile["000/dev4434/demods/0/timeconstant/value"][0]
+        filter_order = dataFile["000/dev4434/demods/0/order/value"][0]
+    return dataX, dataY, pulseData, dfreq, filter_TC, filter_order
 
 
 def findpulse(dataX = [], dataY = [], pulseData = [], trigger = 0, pulselen=0, samprate=1e3):
@@ -262,10 +262,10 @@ def SNRissuev2(
     plt.show()
 
 def pulseNMRplot(
-        filename,
+        file,
         attenuation=6,  # in dB. Power ratio (10^(attenuation/10)). Positive value means signal was attenuated beforehand.
         window='rectangle',  # Hanning, Hamming, Blackman
-        DTRCfilter='off',
+        DTRCfilter='on',
         dfreq = 0,  # in Hz
         samprate = 13e3,  # in Hz
         pulselength = 1.0,
@@ -292,7 +292,7 @@ def pulseNMRplot(
         verbose=True
 ):
     '''
-    filename,
+    file,
     dfreq = 0,  # in Hz
         samprate = 13e3,  # in Hz
         pulselength = 3.0,
@@ -323,7 +323,7 @@ def pulseNMRplot(
     :return:
     '''
 
-    dataX, dataY, pulseData = loadStream(filename)  # , frequency, timeconstant, filterorder
+    dataX, dataY, pulseData, dfreq, filter_TC, filter_order = loadStream(file)  #
     if verbose:
         print('Time constant: ')
     dataXY = np.abs(dataX + 1j * dataY)
@@ -371,8 +371,8 @@ def pulseNMRplot(
             attenuation=attenuation,  # in dB. Power ratio (10^(attenuation/10))
             window='rectangle',  # Hanning, Hamming, Blackman
             DTRCfilter=DTRCfilter,
-            DTRCfilter_Tc=2.548e-5,
-            DTRCfilter_order=8,
+            DTRCfilter_Tc=filter_TC,
+            DTRCfilter_order=filter_order,
             verbose=True
         )
         if verbose:
@@ -433,7 +433,7 @@ def pulseNMRplot(
         if frequnit == 'kHz':
             freqfactor = 1e-3
         elif frequnit == 'MHz':
-            sfreqfactor = 1e-6
+            freqfactor = 1e-6
         elif frequnit == 'GHz':
             freqfactor = 1e-9
         elif frequnit == 'THz':
@@ -515,7 +515,7 @@ def pulseNMRplot(
             FluxPSD_ax.set_ylabel('Flux Power Spectrum Density / ' + densityunit)
             if ampscale == 'log':
                 FluxPSD_ax.set_yscale("log")
-            FluxPSD_ax.legend(loc='upper right')
+            #FluxPSD_ax.legend(loc='upper right')
         elif spectype == 'FluxASD':
             FluxASD_ax = fig.add_subplot(gs[:, 1])
             FluxASD_ax.plot(freqfactor * frequencies, Mf / Rf * ampfactor * np.sqrt(PSD), label="Flux ASD",
@@ -534,7 +534,7 @@ def pulseNMRplot(
             raise ValueError('spectype set wrong')
 
         # plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
-        fig.suptitle('Single shot\n' + filename)
+        fig.suptitle('Single shot\n' + file)
         #plt.tight_layout()
         plt.grid()
         plt.show()
@@ -553,9 +553,9 @@ def pulseNMRplot(
             dfreq = dfreq,  # in Hz
             attenuation = 6,  # in dB. Power ratio (10^(attenuation/10))
             window = 'rectangle',  # Hanning, Hamming, Blackman
-            DTRCfilter='on',
-            DTRCfilter_Tc=2.5486E-5,
-            DTRCfilter_order=8
+            DTRCfilter=DTRCfilter,
+            DTRCfilter_Tc=filter_TC,
+            DTRCfilter_order=filter_order,
         )
         #print(singlePSD.shape)
         PSD += singlePSD
@@ -582,7 +582,7 @@ def pulseNMRplot(
         std_ax.set_xlabel('number of FID? averaged')
         std_ax.set_ylabel('standard deviation / $V^2/Hz$')
         std_ax.legend(loc='upper right')
-        fig.suptitle('' + filename)
+        fig.suptitle('' + file)
         plt.grid()
         plt.show()
         del std_ax, fig, gs, stdofPSD
@@ -716,7 +716,7 @@ def pulseNMRplot(
             FluxPSD_ax.set_ylabel('Flux Power Spectrum Density / ' + densityunit)
             if ampscale == 'log':
                 FluxPSD_ax.set_yscale("log")
-            FluxPSD_ax.legend(loc='upper right')
+            #FluxPSD_ax.legend(loc='upper right')
         elif spectype == 'FluxASD':
             FluxASD_ax = fig.add_subplot(gs[:, 1])
             FluxASD_ax.plot(freqfactor * frequencies, Mf / Rf * ampfactor * np.sqrt(PSD), label="Flux ASD",
@@ -734,15 +734,15 @@ def pulseNMRplot(
         else:
             raise ValueError('spectype set wrong')
     #plt.legend('upper right')  # 'upper left', 'upper right', 'lower left', 'lower right'
-    fig.suptitle('All shots\n'+filename)
+    fig.suptitle('All shots\n'+file)
     plt.grid()
     plt.show()
     del fig, gs
 
-sw=3
+sw=300
 if sw==0:
     pulseNMRplot(
-        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_000/stream_00000.h5",
+        file="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\stream_000/stream_00000.h5",
         dfreq=30e3,  # in Hz
         samprate=26.79e3,  # in Hz
         pulselength=1,
@@ -764,7 +764,7 @@ if sw==0:
     )
 if sw==1:
     pulseNMRplot(
-        filename="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\17\\stream_000/stream_00000.h5",
+        file="D:\\Mainz\\CASPEr\\20211112 Lowfield NMR\\data\\17\\stream_000/stream_00000.h5",
         attenuation=6,
         # in dB. Power ratio (10^(attenuation/10)). Positive value means signal was attenuated beforehand.
         window='rectangle',  # Hanning, Hamming, Blackman
