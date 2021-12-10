@@ -126,15 +126,8 @@ def SHIMbysweep(
 	shimlog[0, chnum:chnum + 3] = report
 	shimlog[0, chnum + 3:chnum + 6] = popt
 	"""
-		    Channel A ---> Shim X
-			Channel B ---> Shim Z1
-			Channel C ---> Shim Y
-			Channel D ---> Shim Z2
-			Channel E ---> Shim XY
-			Channel F ---> Shim ZX
-			Channel G ---> Shim ZY
-			Channel H ---> Shim X2-Y2
-		"""
+	
+	"""
 	for curH in currspace:
 		print('cur H = ',curH)
 		print('\n')
