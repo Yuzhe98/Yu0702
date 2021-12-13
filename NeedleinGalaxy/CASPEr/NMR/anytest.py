@@ -6,7 +6,7 @@ import matplotlib.gridspec as gridspec
 
 #file="D:\\Mainz\\CASPEr\\20211208 SQUID shim\\stream_"+str(139)+"/stream_00000.h5",
 #file="D:\\Mainz\\CASPEr\\20211208 SQUID shim\\session_20211210_123550_000" + "/session_20211210_123550_00000.h5",
-sw=2
+sw=1
 if sw==1:
         NMRa.pulsedNMRplot(
                 #file="D:\\Mainz\\CASPEr\\20211208 SQUID shim\\stream_"+str(139)+"/stream_00000.h5",
@@ -20,7 +20,7 @@ if sw==1:
                 #samprate=13.39e3,  # in Hz
                 pulselength=225e-6,
                 acqdelay=600e-6,
-                acqtime=100e-3,
+                acqtime=30e-3,
                 showtimedomain=True,
                 showacqdata=True,
                 showfreqdomain=True,
@@ -29,10 +29,10 @@ if sw==1:
                 spectype='FluxPSD',
                 Mf=1 / (44.12e-6),  # feedback sensitivity
                 Rf=10e3,  # in Ohm
-                frequnit='Hz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
+                frequnit='MHz',  # in Hz by default. 'kHz' 'MHz' 'GHz' 'THz'
                 ampunit='muPhi',  # 'V', 'muV', 'muPhi'
                 ampscale='linear',
-                singlePSD_arr=[],
+                singlePSD_arr=[0],
                 stddev_range=[1.34e6, 1.35e6],
                 verbose=True
         )
@@ -49,11 +49,11 @@ if sw==2:
                 dfreq=0,  # in Hz
                 samprate=13392.857421875,  # in Hz
 
-                chunksize=500e-3,  # in second
+                chunksize=513e-3,  # in second
                 analysisrange=[120, -1],
 
-                showtimedomain=False,
-                showacqdata=False,
+                showtimedomain=True,
+                showacqdata=True,
                 showfreqdomain=True,
                 showstd=False,
 
